@@ -7,6 +7,8 @@
     <meta name="description" content="Página institucional de la Secretaría de Turismo del Estado de Chiapas">
     <meta name="author" content="Secretaría de Turismo del Estado de Chiapas">
     <meta name="generator" content="Secretaría de Turismo">
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title_page')</title>
 
     {{-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> --}}
@@ -69,7 +71,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{route('paginas.index')}}">
                                 <span data-feather="file"></span>
                                 Paginas
                             </a>
@@ -78,6 +80,12 @@
                             <a class="nav-link" href="{{route('menus.index')}}">
                                 <span data-feather="shopping-cart"></span>
                                 Menú
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('footers.index')}}">
+                                <span data-feather="shopping-cart"></span>
+                                Footer
                             </a>
                         </li>
                         <li class="nav-item">

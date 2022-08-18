@@ -25,6 +25,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Slug</th>
+                    <th>Target</th>
                     <th>Activo</th>
                     <th>Fecha de creación</th>
                     <th>Acciones</th>
@@ -68,6 +69,7 @@ $(document).ready(function () {
         "columns": [
             {data: 'name'},
             {data: 'slug'},
+            {data: 'target'},
             {data: 'enabled'},
             {data: 'created_at'},
             {data: 'btn'},
@@ -94,6 +96,14 @@ $(document).ready(function () {
             'previous': 'Anterior'
             }
         },
+        // Estas lineas de abajo 
+        stateSave: true,
+        stateSaveCallback: function(settings,data) {
+            localStorage.setItem( 'DataTables_' + settings.sInstance, JSON.stringify(data) )
+            },
+        stateLoadCallback: function(settings) {
+            return JSON.parse( localStorage.getItem( 'DataTables_' + settings.sInstance ) )
+            }
     });
 });
 </script>

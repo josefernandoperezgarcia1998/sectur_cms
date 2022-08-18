@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('test', function($view){
+        view()->composer('layouts.pagina.pagina-plantilla', function($view){
             $view->with('menus', Menu::menus());
         });
         view()->composer('welcome', function($view){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Pagina;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
@@ -16,16 +17,51 @@ class MenuController extends Controller
 
     public function create()
     {
+        // $arreglo1 = Menu::all()->toArray();
+        // $arreglo2 = Pagina::all()->toArray();
+        // $arreglos = array_merge($arreglo1, $arreglo2);
+        // dd($arreglos);
         $menus = Menu::all();
-        return view('menu.create', compact('menus'));
+        $paginas = DB::table('paginas')->orderBy('titulo','asc')->get();
+        return view('menu.create', compact('menus','paginas'));
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $valoresMenu = $request->all();
-        Menu::create($valoresMenu);
-        return redirect()->route('menus.index')->with('success', 'Registro creado correctamente');
+        // Si del request pagina_id no contiene nada se envía
+        if(!isset($request->pagina_id))
+        {
+            $valoresMenu = $request->all();
+            $pagina_id = $request->pagina_id;
+            $paginaNombre = Pagina::findOrFail($pagina_id);
+            $slugPagina = $paginaNombre->slug;
+
+            $valoresMenu['nombre_pagina'] = $slugPagina;
+
+            Menu::create($valoresMenu);
+            return redirect()->route('menus.index')->with('success', 'Registro creado correctamente');
+        }
+        elseif(isset($request->pagina_id))
+        {
+            $valoresMenu = $request->all();
+            $pagina_id = $request->pagina_id;
+            $paginaNombre = Pagina::findOrFail($pagina_id);
+            $slugPagina = $paginaNombre->slug;
+
+            $valoresMenu['nombre_pagina'] = $slugPagina;
+
+            Menu::create($valoresMenu);
+            return redirect()->route('menus.index')->with('success', 'Registro creado correctamente');
+        }
+        else
+        {
+            $valoresMenu = $request->all();
+            $valoresMenu['pagina_id'] = null;
+            $valoresMenu['nombre_pagina'] = null;
+
+            Menu::create($valoresMenu);
+            return redirect()->route('menus.index')->with('success', 'Registro creado correctamente');
+        }
     }
 
     public function edit($id)

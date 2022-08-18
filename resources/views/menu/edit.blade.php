@@ -45,15 +45,6 @@
                                 <span id="error_slug"></span>
                             </div>
                         </div>
-                        {{-- <div class="col">
-                            <div class="bmd-form-group md-10">
-                                <div class="input-group">
-                                    <label class="bmd-label-floating">Correo electrónico</label>
-                                    <input type="email" name="email" class="form-control" id="email">
-                                </div>
-                                <span id="error_slug"></span>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -62,15 +53,20 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
-                                <label for="rol" class="form-label">Tipo</label>
-                                {{-- <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnPadre"
-                                        checked>
-                                    <label class="form-check-label" for="radio-boton-hijo">
-                                        Padre
+                                <label for="url-interno">URL/Página</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnURL">
+                                    <label class="form-check-label" for="radio-boton">
+                                        URL
                                     </label>
-                                    <input type="number" class="form-control" id="inputbtnPadre" name="parent" value="0"
-                                        autocomplete="off" style="display: none;">
+                                    <input type="text" class="form-control" id="enlace" name="enlace" autocomplete="off">
+                                </div>
+                                {{-- <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnURL">
+                                    <label class="form-check-label" for="radio-boton">
+                                        Página
+                                    </label>
+                                    <input type="text" class="form-control" id="enlace" name="enlace" autocomplete="off">
                                 </div> --}}
                                 {{-- <div class="form-check">
                                     <input class="form-check-input" type="radio" name="parent" id="radiobtnHijo">
@@ -78,6 +74,11 @@
                                         Hijo
                                     </label>
                                 </div> --}}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="rol" class="form-label">Tipo</label>
                                 <select class="form-select" id="selectMenu" name="parent">
                                     <option value="0">Seleccionar menú</option>
                                     @foreach ($menus as $menu)
@@ -89,6 +90,24 @@
                                     <option value="{{ $menu->id }}" @if ($menuData->parent === $menu->id || old('parent') === $menu->id) selected @endif>&nbsp;&nbsp;&nbsp;&nbsp;{{ $menu->name }}</option>
                                     @endif
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="estado" class="form-label">Target</label>
+                                <select class="form-select" name="target">
+                                    <option value="" selected>Seleccionar estado</option>
+                                    <option {{ old('target') == '_blank' ? 'selected' : ($menu->target == '_blank' ? 'selected' : '') }} value="_blank">_blank</option>
+                                    <option {{ old('target') == '_parent' ? 'selected' : ($menu->target == '_parent' ? 'selected' : '') }} value="_parent">_parent</option>
+                                    <option {{ old('target') == '_self' ? 'selected' : ($menu->target == '_self' ? 'selected' : '') }} value="_self">_self</option>
+                                    <option {{ old('target') == '_top' ? 'selected' : ($menu->target == '_top' ? 'selected' : '') }} value="_top">_top</option>
                                 </select>
                             </div>
                         </div>
@@ -119,7 +138,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Actualizar</button>
-            <a href="{{ route('usuarios.index') }}" class="btn btn-sm btn-secondary">Volver</a>
+            <a href="{{ route('menus.index') }}" class="btn btn-sm btn-secondary">Volver</a>
         </form>
     </div>
 </div>

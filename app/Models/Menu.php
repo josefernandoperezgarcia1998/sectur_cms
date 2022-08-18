@@ -16,6 +16,10 @@ class Menu extends Model
         'parent',
         'order',
         'enabled',
+        'enlace',
+        'target',
+        'pagina_id',
+        'nombre_pagina',
     ];
 
     public function getChildren($data, $line)
@@ -48,4 +52,11 @@ class Menu extends Model
         }
         return $menus->menuAll = $menuAll;
     }
+
+    public function paginas()
+    {
+        return $this->hasMany(Pagina::class);
+    }
+
+
 }

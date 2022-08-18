@@ -44,21 +44,37 @@
                                 <span id="error_slug"></span>
                             </div>
                         </div>
-                        {{-- <div class="col">
-                            <div class="bmd-form-group md-10">
-                                <div class="input-group">
-                                    <label class="bmd-label-floating">Correo electrónico</label>
-                                    <input type="email" name="email" class="form-control" id="email">
-                                </div>
-                                <span id="error_slug"></span>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="url-interno">URL/Página</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnURL">
+                                    <label class="form-check-label" for="radio-boton">
+                                        URL
+                                    </label>
+                                    <input type="text" class="form-control" id="enlace" name="enlace" autocomplete="off">
+                                </div>
+                                {{-- <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnURL">
+                                    <label class="form-check-label" for="radio-boton">
+                                        Página
+                                    </label>
+                                    <input type="text" class="form-control" id="enlace" name="enlace" autocomplete="off">
+                                </div> --}}
+                                {{-- <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnHijo">
+                                    <label class="form-check-label" for="radio-boton-hijo">
+                                        Hijo
+                                    </label>
+                                </div> --}}
+                            </div>
+                        </div>
                         <div class="col">
                             <div class="mb-3">
                                 <label for="rol" class="form-label">Tipo</label>
@@ -69,9 +85,9 @@
                                         Padre
                                     </label>
                                     <input type="number" class="form-control" id="inputbtnPadre" name="parent" value="0"
-                                        autocomplete="off" style="display: none;">
-                                </div> --}}
-                                {{-- <div class="form-check">
+                                        autocomplete="off">
+                                </div>
+                                <div class="form-check">
                                     <input class="form-check-input" type="radio" name="parent" id="radiobtnHijo">
                                     <label class="form-check-label" for="radio-boton-hijo">
                                         Hijo
@@ -88,6 +104,25 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;{{$menu->name}}</option>
                                     @endif
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="target" class="form-label">Target</label>
+                                <select class="form-select" name="target" required>
+                                    <option value="" selected>Seleccionar estado</option>
+                                    <option {{ old('target') == '_blank' ? 'selected' : '' }} value="_blank">_blank</option>
+                                    <option {{ old('target') == '_parent' ? 'selected' : '' }} value="_parent">_parent</option>
+                                    <option {{ old('target') == '_self' ? 'selected' : '' }} value="_self">_self</option>
+                                    <option {{ old('target') == '_top' ? 'selected' : '' }} value="_top">_top</option>
                                 </select>
                             </div>
                         </div>
@@ -112,6 +147,17 @@
                                 <label for="nombre" class="form-label">Orden</label>
                                 <input type="number" class="form-control w-50" id="order" name="order" value="{{ old('order') }}"
                                     autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="area" class="form-label">Página</label>
+                                <select class="form-select" name="pagina_id" value="{{ old('pagina_id') }}">
+                                    <option value="0" selected>Selecciona una página</option>
+                                    @foreach ($paginas as $pagina)
+                                        <option value="{{$pagina->id}}" {{ old('pagina_id') == $pagina->id ? 'selected' : '' }}>{{$pagina->titulo}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

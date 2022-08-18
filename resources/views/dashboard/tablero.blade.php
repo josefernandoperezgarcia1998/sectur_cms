@@ -66,13 +66,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{route('paginas.index')}}">
                                 <span data-feather="file"></span>
                                 Paginas
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{route('menus.index')}}">
                                 <span data-feather="shopping-cart"></span>
                                 Menú
                             </a>
@@ -81,6 +81,12 @@
                             <a class="nav-link" href="{{route('usuarios.index')}}">
                                 <span data-feather="users"></span>
                                 Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('footers.index')}}">
+                                <span data-feather="users"></span>
+                                Footer
                             </a>
                         </li>
                     </ul>
@@ -94,7 +100,7 @@
                     {{-- <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                             <span data-feather="calendar"></span>
@@ -105,15 +111,15 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        {{-- <div class="col-sm">
+                        <div class="col-sm">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">Páginas</h5>
                                     <p class="card-text">Total de páginas: </p>
-                                    <a href="#" class="btn btn-primary btn-sm">Ir...</a>
+                                    <a href="{{route('paginas.index')}}" class="btn btn-primary btn-sm">Ir...</a>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="col-sm">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">

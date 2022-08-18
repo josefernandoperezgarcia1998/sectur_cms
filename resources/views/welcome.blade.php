@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" /> --}}
     <link href="{{asset('assets/assets-bootstrap/bootstrap-general/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -58,12 +59,22 @@
         }
 
     </style>
+
+    <style>
+        .fot{
+            position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img
+            <a class="navbar-brand" href="{{route('inicio')}}"><img
                 src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -85,11 +96,29 @@
 
     <div class="container mt-5">
         <div class="alert alert-info">
-            <a href="https://github.com/kmlpandey77/bootnavbar#readme">
+            <a href="#">
                 How to use bootNavbar
             </a>
         </div>
     </div>
+    <div class="container mt-5">
+        <div class="alert alert-info">
+            <a href="#">
+                How to use bootNavbar
+            </a>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="alert alert-info">
+            <a href="#">
+                How to use bootNavbar
+            </a>
+        </div>
+    </div>
+
+        <!-- Footer -->
+    @include('layouts.footer')
+        <!-- Footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
