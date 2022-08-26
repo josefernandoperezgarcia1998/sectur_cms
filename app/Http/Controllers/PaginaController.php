@@ -79,14 +79,32 @@ class PaginaController extends Controller
 
         $pagina_data = $request->all();
 
-        // Si exisste una imagen destacada la elimina y sustituye con una nueva
-        if($request->hasFile('imagen_destacada')){
+        // La primer condición dice 
+        //"Si al momento de actualizar el campo de imagen_destacada es NULL en la BD y si existe algo en el request de imagen_destacada
+        //Va a guardar en la base de datos eso, ahora bien,
+        // La segunda condición dice, si al momento de actualizar la información existe algo en el request, lo que hará es actualizar la
+        // imagen que se tiene actualmente en le BD y la almacenará.
+        if(($pagina->imagen_destacada == NULL) && ($request->hasFile('imagen_destacada'))){
+            $hora = Str::slug(date('h:i:s A'),'_');
+            $image = $request->file('imagen_destacada');
+            $imageName = $hora.'_'.$image->getClientOriginalName();
+            $pagina_data['imagen_destacada'] = $request->file('imagen_destacada')->storeAs('uploads/paginas/imagenes_destacadas', $imageName, 'public');
+        } elseif ($request->hasFile('imagen_destacada')) {
             $hora = Str::slug(date('h:i:s A'),'_');
             $image = $request->file('imagen_destacada');
             $imageName = $hora.'_'.$image->getClientOriginalName();
             Storage::delete($pagina->imagen_destacada);
             $pagina_data['imagen_destacada'] = $request->file('imagen_destacada')->storeAs('uploads/paginas/imagenes_destacadas', $imageName, 'public');
         }
+
+        // Si exisste una imagen destacada la elimina y sustituye con una nueva
+        // if($request->hasFile('imagen_destacada')){
+        //     $hora = Str::slug(date('h:i:s A'),'_');
+        //     $image = $request->file('imagen_destacada');
+        //     $imageName = $hora.'_'.$image->getClientOriginalName();
+        //     Storage::delete($pagina->imagen_destacada);
+        //     $pagina_data['imagen_destacada'] = $request->file('imagen_destacada')->storeAs('uploads/paginas/imagenes_destacadas', $imageName, 'public');
+        // }
 
         $pagina->update($pagina_data);
 
@@ -118,6 +136,7 @@ class PaginaController extends Controller
 
     public function destroy(Pagina $pagina)
     {
+        // dd($pagina->imagen_destacada);
         $pagina->delete();
         return redirect()->route('paginas.index')->with('success', 'Página eliminada correctamente');
     }

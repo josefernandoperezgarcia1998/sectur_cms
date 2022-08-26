@@ -16,12 +16,13 @@
         <div class="card-header">
             <h3 class="display-6">{{$page->titulo}}</h3>
         </div>
-        <div class="container-fluid">
+        <div class="card-body">
                 @if (is_null($page->imagen_destacada) || $page->imagen_principal_estado == 'No')
 
                 @else
                     <img src="{{asset('storage').'/'.$page->imagen_destacada}}" alt="imagen" class="img-fluid rounded mx-auto d-block">
                 @endif
+                <hr>
                 <div class="contenedor">{!!$page->contenido!!}</div>
         </div>
     @endforeach

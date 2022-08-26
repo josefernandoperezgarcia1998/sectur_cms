@@ -28,37 +28,24 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         // Si del request pagina_id no contiene nada se envía
-        if(!isset($request->pagina_id))
-        {
+        if(($request->pagina_id != '0') && (is_null($request->enlace))){
             $valoresMenu = $request->all();
             $pagina_id = $request->pagina_id;
             $paginaNombre = Pagina::findOrFail($pagina_id);
             $slugPagina = $paginaNombre->slug;
 
             $valoresMenu['nombre_pagina'] = $slugPagina;
-
+            
             Menu::create($valoresMenu);
             return redirect()->route('menus.index')->with('success', 'Registro creado correctamente');
         }
-        elseif(isset($request->pagina_id))
-        {
-            $valoresMenu = $request->all();
-            $pagina_id = $request->pagina_id;
-            $paginaNombre = Pagina::findOrFail($pagina_id);
-            $slugPagina = $paginaNombre->slug;
-
-            $valoresMenu['nombre_pagina'] = $slugPagina;
-
-            Menu::create($valoresMenu);
-            return redirect()->route('menus.index')->with('success', 'Registro creado correctamente');
-        }
-        else
+        elseif(($request->pagina_id == '0') && (!is_null($request->enlace)))
         {
             $valoresMenu = $request->all();
             $valoresMenu['pagina_id'] = null;
             $valoresMenu['nombre_pagina'] = null;
-
             Menu::create($valoresMenu);
             return redirect()->route('menus.index')->with('success', 'Registro creado correctamente');
         }
@@ -67,20 +54,44 @@ class MenuController extends Controller
     public function edit($id)
     {
         $menus = Menu::all();
+        $paginas = DB::table('paginas')->orderBy('titulo','asc')->get();
         $menuData = Menu::findOrFail($id);
         
-        return view('menu.edit', compact('menuData', 'menus'));
+        return view('menu.edit', compact('menuData', 'menus', 'paginas'));
     }
 
     public function update(Request $request, $id)
     {
-        $valoresMenu = $request->all();
-        
+        // $valoresMenu = $request->all();
+        // $menu = Menu::find($id);
+        // $menu->fill($valoresMenu);
+        // $menu->save();
+        // return redirect()->route('menus.index', $id)->with('success','Registro actualizado correctamente');
+        //Esto de arriba no se mueve
         $menu = Menu::find($id);
-        $menu->fill($valoresMenu);
-        $menu->save();
+        if(($request->pagina_id != '0') && (is_null($request->enlace))){
+            $valoresMenu = $request->all();
+            $request->validate([
+                'slug' => "unique:menus,slug,$menu->id",
+            ]);
+            $pagina_id = $request->pagina_id;
+            $paginaNombre = Pagina::findOrFail($pagina_id);
+            $slugPagina = $paginaNombre->slug;
 
-        return redirect()->route('menus.index', $id)->with('success','Registro actualizado correctamente');
+            $valoresMenu['nombre_pagina'] = $slugPagina;
+            
+            $menu->update($valoresMenu);
+            return redirect()->route('menus.index')->with('success', 'Registro actualizado correctamente');
+        }
+        elseif(($request->pagina_id == '0') && (!is_null($request->enlace)))
+        {
+            $valoresMenu = $request->all();
+            $valoresMenu['pagina_id'] = null;
+            $valoresMenu['nombre_pagina'] = null;
+            $menu->update($valoresMenu);
+            return redirect()->route('menus.index')->with('success', 'Registro actualizado correctamente');
+        }
+
     }
 
     public function destroy($id)

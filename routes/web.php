@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArchivosPaginaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AutenticarController;
 use App\Http\Controllers\UsuarioController;
@@ -7,7 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaginaController;
 use App\Http\Controllers\FooterController;
-
+use App\Models\Archivo;
+use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -48,7 +50,13 @@ Route::post('slug-check', [MenuController::class, 'check'])->name('menu.register
 // Ruta resource para las páginas
 Route::resource('paginas', PaginaController::class)->names('paginas');
 
-// Ruta con ajax para obtener toda la data del menu con datatables
+// Ruta con ajax para obtener toda la data de archivos de una página con datatables
+Route::get('paginas-data-archivos', [ArchivosPaginaController::class, 'paginasArchivosDatatables'])->name('paginas-data-archivos');
+Route::get('prueba', function() {
+   dd(session()->all());
+   });
+
+// Ruta con ajax para obtener toda la data de paginas con datatables
 Route::get('paginas-data', [PaginaController::class, 'paginasDatatables'])->name('paginas-data');
 
 // Ruta get para visualziar las páginas
@@ -56,4 +64,16 @@ Route::get('{pagina}', [PaginaController::class, 'tipoPagina'])->name('pagina');
 
 // Ruta para subir imagen
 Route::post('image/upload', [PaginaController::class, 'upload'])->name('image.upload');
+
+// Ruta para mostrar la vista principal de archivos de una página
+Route::get('paginas/{pagina}/archivos',[ArchivosPaginaController::class, 'index'])->name('paginas.archivos');
+
+
+Route::resource('archivos', ArchivosPaginaController::class)->names('paginas-archivos');
+
+
+
+
+
+Route::get('archivos/create/{pagina}/archivo', [ArchivosPaginaController::class, 'create'])->name('paginas-archivos.create');
 

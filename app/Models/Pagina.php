@@ -40,4 +40,9 @@ class Pagina extends Model
     //         get: fn ($value) => ucfirst($value),
     //     );
     // }
+
+    public function archivos()
+    {
+        return $this->hasMany(Archivo::class);
+    }
 }

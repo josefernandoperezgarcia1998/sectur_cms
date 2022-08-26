@@ -14,7 +14,7 @@
                         alt="logo_sectur"></a>
                         <a class="" href="#"><img
                             class="img-fluid"
-                            src="http://www.turismochiapas.gob.mx/institucional/media/theme/icon-footer2.png"
+                            src="{{asset('assets/imgs/sectur/logo_chiapas.png')}}"
                             alt="logo_sectur" height="80" width="200"></a>
                 </div>
                 <!-- Grid column -->

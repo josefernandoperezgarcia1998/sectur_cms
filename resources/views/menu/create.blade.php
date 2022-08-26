@@ -59,40 +59,37 @@
                                         URL
                                     </label>
                                     <input type="text" class="form-control" id="enlace" name="enlace" autocomplete="off">
+                                    <span id="error_url"></span>
                                 </div>
-                                {{-- <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnURL">
-                                    <label class="form-check-label" for="radio-boton">
-                                        Página
-                                    </label>
-                                    <input type="text" class="form-control" id="enlace" name="enlace" autocomplete="off">
-                                </div> --}}
-                                {{-- <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnHijo">
-                                    <label class="form-check-label" for="radio-boton-hijo">
-                                        Hijo
-                                    </label>
-                                </div> --}}
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-3">
-                                <label for="rol" class="form-label">Tipo</label>
-                                {{-- <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnPadre"
-                                        checked>
-                                    <label class="form-check-label" for="radio-boton-hijo">
-                                        Padre
-                                    </label>
-                                    <input type="number" class="form-control" id="inputbtnPadre" name="parent" value="0"
-                                        autocomplete="off">
-                                </div>
+                                <br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="parent" id="radiobtnHijo">
-                                    <label class="form-check-label" for="radio-boton-hijo">
-                                        Hijo
+                                    <input class="form-check-input" type="radio" name="pagInt" id="radiobtnPagIn" value="pagInt">
+                                    <label class="form-check-label" for="radio-boton">
+                                        Pagina Interna
                                     </label>
-                                </div> --}}
+                                    <select class="form-select" id="selectMenuPaginaInterna" name="pagina_id" value="{{ old('pagina_id') }}">
+                                        <option value="0" selected>Selecciona una página</option>
+                                        @foreach ($paginas as $pagina)
+                                            <option value="{{$pagina->id}}" {{ old('pagina_id') == $pagina->id ? 'selected' : '' }}>{{$pagina->titulo}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span id="error_url"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="rol" class="form-label">Tipo</label>
                                 <select class="form-select" id="selectMenu" name="parent">
                                     <option value="0">Seleccionar menú</option>
                                     @foreach ($menus as $menu)
@@ -105,15 +102,9 @@
                                     @endif
                                     @endforeach
                                 </select>
+                                
                             </div>
                         </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label for="target" class="form-label">Target</label>
@@ -126,6 +117,12 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label for="estado" class="form-label">Activo</label>
@@ -136,12 +133,6 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Orden</label>
@@ -149,22 +140,11 @@
                                     autocomplete="off" required>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label for="area" class="form-label">Página</label>
-                                <select class="form-select" name="pagina_id" value="{{ old('pagina_id') }}">
-                                    <option value="0" selected>Selecciona una página</option>
-                                    @foreach ($paginas as $pagina)
-                                        <option value="{{$pagina->id}}" {{ old('pagina_id') == $pagina->id ? 'selected' : '' }}>{{$pagina->titulo}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-sm btn-primary">Crear</button>
-            <a href="{{ route('usuarios.index') }}" class="btn btn-sm btn-secondary">Volver</a>
+            <button id='btnSubmit' type="submit" class="btn btn-sm btn-primary">Crear</button>
+            <a href="{{ route('menus.index') }}" class="btn btn-sm btn-secondary">Volver</a>
         </form>
     </div>
 </div>
@@ -183,18 +163,57 @@
 <script>
     $(document).ready(function () {
         
-        // $("#radiobtnPadre").change(function () {	 
-        // 	console.log('Padre');
-        //     $('#selectbtnHijo').prop('disabled', true);
-        //     $('#inputbtnPadre').prop('disabled', false);
-        //     $('#inputbtnPadre').val('0');
+        // Inicio Validación para los radiobutton e inputs/select de que tipo será el menú si URL ó pagina interna
+        // $("#radiobtnPagIn").change(function () {	 
+        //     console.log('Padre');
+        //     $('#enlace').attr('readOnly', true);
         // });
 
-        // $("#radiobtnHijo").change(function () {	 
-        // 	console.log('Hijo');
-        //     $('#inputbtnPadre').prop('disabled', true);
-        //     $('#selectbtnHijo').prop('disabled', false);
+        // $("#radiobtnURL").change(function () {	 
+        //     console.log('Hijo');
+        //     $('#enlace').attr('readOnly', false);
         // });
+
+        $('#enlace').click(function () {
+            $("#radiobtnURL").prop("checked", true);
+            $("#radiobtnPagIn").prop("checked", false);
+            if(($('#radiobtnURL').is(':checked'))){
+                $("#radiobtnURL").prop("checked", true);
+                $('#enlace').attr('readOnly', false);
+                $('#selectMenuPaginaInterna').val('0');
+            }
+        });
+
+        $('#selectMenuPaginaInterna').click(function () {
+            $("#radiobtnPagIn").prop("checked", true);
+            $("#radiobtnURL").prop("checked", false);
+            $('#enlace').attr('readOnly', true);
+            $('#enlace').val('');
+        });
+
+        /* Inicio - Estos son los radiobuttons si se seleccionan */
+        $('#radiobtnURL').click(function () {
+            $("#radiobtnURL").prop("checked", true);
+            $("#radiobtnPagIn").prop("checked", false);
+            if(($('#radiobtnURL').is(':checked'))){
+                $("#radiobtnURL").prop("checked", true);
+                $('#enlace').attr('readOnly', false);
+                $('#selectMenuPaginaInterna').val('0');
+            }
+        });
+
+        $('#radiobtnPagIn').click(function () {
+            $("#radiobtnPagIn").prop("checked", true);
+            $("#radiobtnURL").prop("checked", false);
+            $('#enlace').attr('readOnly', true);
+            $('#enlace').val('');
+        });
+        /* Inicio - Estos son los radiobuttons si se seleccionan */
+
+
+
+        // Fin Validación para los radiobutton e inputs/select de que tipo será el menú si URL ó pagina interna
+
 
         $('#selectMenu').on('change', function () {
             if (this.value == 0) {
@@ -204,12 +223,16 @@
             }
         });
 
+        // Inicio Conversión del nombre del menú a slug con el plugin de Jquery de stringToSlug
         $('#name').stringToSlug({
             setEvents: 'keyup keydown blur',
             getPut: '#slug',
             space: '-'
         });
+        // Fin Conversión del nombre del menú a slug con el plugin de Jquery de stringToSlug
 
+
+        // Inicio Validación de si existe ó no un slug disponible para el menú
         $('#name').blur(function () {
             
             var error_slug = '';
@@ -254,8 +277,31 @@
                 $('#register').attr('disabled', 'disabled');
             }
         });
+        // Fin Validación de si existe ó no un slug disponible para el menú
 
-
+        // inicio Validación con expresión regular para que no se permita introducir http/https en un enlace
+        let regexEnlace = new RegExp("^(http|https)://", "i");
+            
+        $('#enlace').blur(function () {
+            
+            let enlace = $('#enlace').val();
+            if ($.trim(enlace).length > 0) {
+                if (regexEnlace.test(enlace)) {
+                    // Si la expresión regular coincide con lo que hay dentro del input enlace agrega un label y desactiva el boton
+                    $('#error_url').html('<label class="badge bg-warning text-dark">Elimina el "http://" ó "https://"</label>').show();
+                    $('#btnSubmit').addClass('disabled','disabled');
+                } else {
+                    // Si la expresión regular NO coincide con lo que hay dentro del input enlace quita el label y activa
+                    console.log('no coincidió');
+                    $('#error_url').html('<label class="badge bg-warning text-dark">Elimina el "http://"" ó "https://"</label>').hide();
+                    $('#btnSubmit').removeClass('disabled','disabled');
+                }
+            } else {
+                console.log('está vacío, no pasa nada');
+                $('#error_url').html('<label class="badge bg-warning text-dark">Elimina el "http://" ó "https://"</label>').hide();
+            }
+        });
+        // Fin Validación con expresión regular para que no se permita introducir http/https en un enlace
 
     });
 
