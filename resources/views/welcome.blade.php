@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <title>
-        Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5
+        Secretaría de Turismo del Estado de Chiapas
     </title>
     <meta name="description" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />
     <meta name="keywords" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />

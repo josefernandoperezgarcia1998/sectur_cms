@@ -15,7 +15,7 @@
     <title>@yield('title_page')</title>
     <meta name="description" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />
     <meta name="keywords" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />
-
+    @stack('css')
     <style>
         .dropdown-menu {
             margin-top: 0;
@@ -60,7 +60,7 @@
     </style>
 </head>
 
-<body>
+<body id="cuerpo">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{route('inicio')}}"><img
@@ -198,8 +198,13 @@
     @include('layouts.footer')
     <!-- Footer -->
 
-
+    
+    {{-- CDN Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    {{-- Menu de navegaión --}}
     <script>
         function bootnavbar(options) {
             const defaultOption = {
@@ -245,10 +250,14 @@
         }
 
     </script>
+    
     <script>
         new bootnavbar();
 
     </script>
+
+    {{-- JS --}}
+    @stack('js')
 </body>
 
 </html>

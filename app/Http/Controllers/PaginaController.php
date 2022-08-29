@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pagina;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Archivo;
 use App\Models\Footer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -172,9 +173,15 @@ class PaginaController extends Controller
         $contenidoFooterRecurso = Footer::where('tipo', 2)->where('estado','Si')->get();
         $contenidoFooterRedes = Footer::where('tipo', 3)->where('estado','Si')->get();
 
+        // Obteniendo si la pagina seleccionada contiene algun archivo
+        $archivosPagina = Archivo::where('pagina_id', $pagina_seleccionada->id)
+                                    ->where('estado', 'Si')
+                                    ->get();
+        // dd($archivosPagina);
+
         switch ($tipoPagina) {
             case 'pagina':
-                return view('paginas.paginas-publicas.paginas-publicas', compact('pagina','paginas','contenidoFooterContacto', 'contenidoFooterRecurso', 'contenidoFooterRedes'));
+                return view('paginas.paginas-publicas.paginas-publicas', compact('pagina','paginas','contenidoFooterContacto', 'contenidoFooterRecurso', 'contenidoFooterRedes', 'archivosPagina'));
                 break;
             case 'blog':
                 return view('paginas.paginas-publicas.paginas-publicas', compact('pagina','paginas'));
