@@ -110,7 +110,7 @@
         @endforelse
     </div>
     <div class="px-5" id="contenidoArchivoBuscador" style="display: none;">
-        <p>Resultados encontrados de la búsqueda: <small id="contador" class="fw-bold text-danger"></small></p>
+        <p>Resultados encontrados de la búsqueda en esta página: <small id="contador" class="fw-bold text-danger"></small></p>
         <br>
         <div id="resultado">
         </div>
