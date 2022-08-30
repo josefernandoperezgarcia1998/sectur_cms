@@ -53,7 +53,7 @@ Route::resource('paginas', PaginaController::class)->names('paginas');
 // Ruta con ajax para obtener toda la data de archivos de una página con datatables
 Route::get('paginas-data-archivos', [ArchivosPaginaController::class, 'paginasArchivosDatatables'])->name('paginas-data-archivos');
 
-// Ruta con AJAX para encontrar archivos dentro del Modelo ArchivosPagina
+// Ruta con AJAX para encontrar archivos dentro con base a una poágina en especifica
 Route::get('paginas-archivos-check', [ArchivosPaginaController::class, 'check'])->name('paginas-archivos.paginas-archivos-check');
 
 

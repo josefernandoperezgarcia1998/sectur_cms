@@ -382,6 +382,7 @@ class ArchivosPaginaController extends Controller
         $archivo = Archivo::find($id);
         $imagen = $archivo->imagen;
         $documento = $archivo->documento;
+        $enlace = $archivo->enlace;
 
         // Se obtiene la página a la que le perteneen los archivos para redireccionar a la vista del listado
         // Y poder mostrar correctamente el mensaje de éxito
@@ -400,6 +401,10 @@ class ArchivosPaginaController extends Controller
             Archivo::destroy($id);
         }
 
+        if($enlace){
+            Archivo::destroy($id);
+        }
+
 
         return redirect()->route('paginas.archivos',$pagina)->with('success', 'Registro eliminado correctamente');
     }
@@ -413,7 +418,7 @@ class ArchivosPaginaController extends Controller
                                 ->toJson();
     }
 
-    // Buscador de las páginas
+    // Función para el buscador de archivos de las páginas
     public function check(Request $request)
     {
 
