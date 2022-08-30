@@ -7,6 +7,7 @@ use App\Models\Archivo;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
@@ -409,5 +410,11 @@ class ArchivosPaginaController extends Controller
                                 ->addColumn('btn', 'paginas.archivos.actions')
                                 ->rawColumns(['btn'])
                                 ->toJson();
+    }
+
+    public function check(Request $request)
+    {
+
+
     }
 }

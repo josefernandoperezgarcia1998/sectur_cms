@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <link rel="icon" type="image/x-icon" href="{{asset('assets/imgs/sectur/favicon_chiapas.png')}}">
-
+    <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <title>@yield('title_page')</title>
     <meta name="description" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />
     <meta name="keywords" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />

@@ -82,7 +82,8 @@
             </div>
             <div class="mb-3">
                 <label for="enlace" class="form-label">Enlace</label>
-                <input type="text" class="form-control" value="{{old('enlace')}}" name="enlace">
+                <input type="text" id="enlace" class="form-control" value="{{old('enlace')}}" name="enlace">
+                <span id="error_url"></span>
                 @error('enlace')
                     <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -99,7 +100,7 @@
                 @enderror
             </div>
             <input type="hidden" name="pagina_id" value="{{$pagina->id}}">
-            <button type="submit" class="btn btn-primary">Crear archivo</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmit">Crear archivo</button>
             <a href="{{ route('paginas.archivos', $pagina) }}" class="btn btn-light">Regresar</a>
         </form>
     </div>
@@ -220,5 +221,31 @@
             $('#btnRemoveImg').hide();
         }
     });
+</script>
+
+<script>
+    // inicio Validación con expresión regular para que no se permita introducir http/https en un enlace
+    let regexEnlace = new RegExp("^(http|https)://", "i");
+    
+    $('#enlace').blur(function () {
+        
+        let enlace = $('#enlace').val();
+        if ($.trim(enlace).length > 0) {
+            if (regexEnlace.test(enlace)) {
+                // Si la expresión regular coincide con lo que hay dentro del input enlace agrega un label y desactiva el boton
+                $('#error_url').html('<label class="badge bg-warning text-dark">Elimina el "http://" ó "https://"</label>').show();
+                $('#btnSubmit').addClass('disabled','disabled');
+            } else {
+                // Si la expresión regular NO coincide con lo que hay dentro del input enlace quita el label y activa
+                console.log('no coincidió');
+                $('#error_url').html('<label class="badge bg-warning text-dark">Elimina el "http://"" ó "https://"</label>').hide();
+                $('#btnSubmit').removeClass('disabled','disabled');
+            }
+        } else {
+            console.log('está vacío, no pasa nada');
+            $('#error_url').html('<label class="badge bg-warning text-dark">Elimina el "http://" ó "https://"</label>').hide();
+        }
+    });
+    // Fin Validación con expresión regular para que no se permita introducir http/https en un enlace
 </script>
 @endpush

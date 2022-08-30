@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Archivo;
 use App\Models\Footer;
+use App\Models\Menu;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
@@ -107,8 +108,49 @@ class PaginaController extends Controller
         //     $pagina_data['imagen_destacada'] = $request->file('imagen_destacada')->storeAs('uploads/paginas/imagenes_destacadas', $imageName, 'public');
         // }
 
-        $pagina->update($pagina_data);
+        // Inicio para cuando se actualice el nombre de una pagina , también se actualice en el menu
 
+        $paginaSeleccionadaParaCambioNombreMenu = Pagina::find($pagina->id);
+        $paginaSlug = $paginaSeleccionadaParaCambioNombreMenu->slug;
+        $menuSeleccionadoParaCambioDeNombrePagina = Menu::where('nombre_pagina', $paginaSlug)->get();
+
+        // En este ciclo almaceno y cambio los valores obtenidos del menu relacionado a la pagina con la que se creó
+        foreach($menuSeleccionadoParaCambioDeNombrePagina as $menuSelect)
+        {
+            $menuId = $menuSelect->id;
+            $menuNombre = $menuSelect->name;
+            $menuSlug = $menuSelect->slug;
+            $menuParent = $menuSelect->parent;
+            $menuOrder = $menuSelect->order;
+            $menuEnabled = $menuSelect->enabled;
+            $menuEnlace = $menuSelect->enlace;
+            $menutarget = $menuSelect->target;
+            $menupaginaId = $menuSelect->pagina_id;
+            $menuNombrePagina = $menuSelect->nombre_pagina;
+
+            $arreglo = array(
+                'id' => $menuId,
+                'name' => $menuNombre,
+                'slug' => $menuSlug,
+                'parent' => $menuParent,
+                'order' => $menuOrder,
+                'enabled' => $menuEnabled,
+                'enlace' => $menuEnlace,
+                'target' => $menutarget,
+                'pagina_id' => $menupaginaId,
+                'nombre_pagina' => $request->slug,
+            );
+
+            $menu = Menu::find($menuId);
+            $menu->fill($arreglo);
+            $menu->save();
+        }
+
+        // Fin para cuando se actualice el nombre de una pagina , también se actualice en el menu
+
+        // Se actualiza los datos de la página
+        $pagina->update($pagina_data);
+        
         $imagenes_antiguas = $pagina->images->pluck('image_url')->toArray();
 
         // expresion regular para recuperar las imagenes de la pagina que existen en el ckeditor
@@ -132,7 +174,7 @@ class PaginaController extends Controller
             }
         }
 
-        return redirect()->route('paginas.edit', $pagina);
+        return redirect()->route('paginas.edit', $pagina)->with('success', 'Registro actualizado con éxito');
     }
 
     public function destroy(Pagina $pagina)
