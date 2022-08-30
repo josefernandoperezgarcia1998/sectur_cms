@@ -28,6 +28,7 @@ class ArchivosPaginaController extends Controller
         $this->paginaSeleccionadaSlug = $paginaSlug;
         session()->put('paginaSelect', $paginaActual);
         session()->put('paginaSelectSlug', $paginaSlug);
+
         return view('paginas.archivos.index', compact('pagina'));
     }
 
@@ -412,9 +413,91 @@ class ArchivosPaginaController extends Controller
                                 ->toJson();
     }
 
+    // Buscador de las páginas
     public function check(Request $request)
     {
 
+        if($request->ajax()){
+            $archivos = Archivo::where('titulo', 'like', '%'. $request->titulo. '%')
+                                ->where('pagina_id', $request->id)
+                                ->where('estado', 'Si')
+                                ->get();
 
+            $respuesta = '';
+
+            if(count($archivos) > 0){
+                
+                foreach($archivos as $archivo){
+                        if(!is_null($archivo->documento))
+                        {
+                            $respuesta .= '<p>
+                                                <a class="enlace-titulo" href="'.asset("storage")."/".$archivo->documento.'" title="Descargar"
+                                                    download="'.$archivo->titulo.'" target="_blank">'.$archivo->titulo.'</a>
+                                                &nbsp;-&nbsp;
+                                                <a class="enlace" style="rgb(166, 75, 10);" href="'.asset("storage")."/".$archivo->documento.'"
+                                                    title="Descargar" download="'.$archivo->titulo.'"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                        <path
+                                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                            <div>
+                                                <div class="d-flex">
+                                                    <small class="text-black-50">Tamaño: '.$archivo->size_documento.'</small>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <small class="text-black-50">Formato: '.$archivo->type_documento.'</small>
+                                                </div>
+                                            </div>
+                                            <hr>';
+                        }
+                        if(!is_null($archivo->imagen))
+                        {
+                            $respuesta .= '<p>
+                                                <a class="enlace-titulo" href="'.asset("storage")."/".$archivo->imagen.'" title="Descargar"
+                                                    download="'.$archivo->titulo.'" target="_blank">'.$archivo->titulo.'</a>
+                                                &nbsp;-&nbsp;
+                                                <a class="enlace" style="rgb(166, 75, 10);" href="'.asset("storage")."/".$archivo->imagen.'"
+                                                    title="Descargar" download="'.$archivo->titulo.'"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                        <path
+                                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                            <div>
+                                                <div class="d-flex">
+                                                    <small class="text-black-50">Tamaño: '.$archivo->size_imagen.'</small>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <small class="text-black-50">Formato: '.$archivo->type_imagen.'</small>
+                                                </div>
+                                            </div>
+                                            <hr>';
+                        }
+                        if(!is_null($archivo->enlace))
+                        {
+                            $respuesta .=   '<p>
+                                                <a class="enlace-titulo" href="https://'.$archivo->enlace.'" title="Visitar '.$archivo->titulo.'" target="_blank">'.$archivo->titulo.'</a>
+                                                &nbsp;-&nbsp;
+                                                <a class="enlace" style="rgb(166, 75, 10);" href="https://'.$archivo->enlace.'" title="Visitar '.$archivo->titulol.'">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                                        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                            <hr>';
+                        }
+                }
+            } else {
+                $respuesta = '<p class="fw-bold text-danger">Sin resultados</p>';
+            }
+        }
+        return response()->json([
+            'respuesta' => $respuesta,
+            'contador' => $archivos->count(),
+        ]);
     }
 }

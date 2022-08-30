@@ -14,6 +14,7 @@
         <div class="d-flex justify-content-between">
             <div>
                 <h1 class="display-6">{{$page->titulo}}</h1>
+                <input type="hidden" name="paginaId" id="paginaId" value="{{$page->id}}">
             </div>
             <div class="pt-3 d-flex">
                 <div>
@@ -109,7 +110,8 @@
         @endforelse
     </div>
     <div class="px-5" id="contenidoArchivoBuscador" style="display: none;">
-        <p>Resultados encontrados de la búsqueda: <small id="contador"></small></p>
+        <p>Resultados encontrados de la búsqueda: <small id="contador" class="fw-bold text-danger"></small></p>
+        <br>
         <div id="resultado">
         </div>
     </div>
@@ -178,34 +180,51 @@
 @push('js')
 
 <script>
+    // Se declaran variables en el scope global
     let iconoBuscador = $('#iconoBuscador');
     let buscador = $('#buscador');
-    
+    let paginaId = $('#paginaId').val();
     let _token =  $('meta[name="csrf-token"]').attr('content');
-    console.log(_token);
 
+    // Esta funcion sirve para que al dar clic en el icono de la lupa para que salga el input del buscador
     $(iconoBuscador).click(function() {
+        // Este evento slideToggle permite hacer un cambio de estado (si es visible ó no) al input del buscador
         $(buscador).slideToggle('slow', function() {
+            // Si el input está visible entra a la condición y con el evento keyup va evaluar el estado del valor del input
+            // Donde si el valor es igual que 0 (el input está vacío) pues va a mostrar el contenedor original de los archivos
+            // Caso contrario que no sea así (el input contiene algo) pues va a desaparecer el contenedor original de los archivos
+            // Al igual que va a mostrar un nuevo contenedor con las coincidencias encontradas de la petición AJAX al servidor
             if($(buscador).is(':visible')){
-                console.log('está visible');
-
                 $(buscador).keyup(function(){
-                    // console.log($(this).val());
                     if($(this).val().length == 0){
-                        // console.log('esta vacio');
                         $('#contenidoArchivos').css('display', 'block');
                     }
                     else if($(this).val().length >= 0) {
                         let titulo = $('#buscador').val();
                         $('#contenidoArchivos').css('display', 'none');
                         $('#contenidoArchivoBuscador').css('display', 'block');
-                        // logica aqui para ajax y mandar a llamar al info....
-                    
+                        // Aquí va la lógica de AJAX para mandar a hacer la petición al servidor 
+                        // Por medio del titulo y del id del archivo se hace la petición
+                        $.ajax({
+                            url: "{{route('paginas-archivos.paginas-archivos-check')}}",
+                            type: 'GET',
+                            data: {
+                                titulo: titulo,
+                                id:paginaId,
+                            },
+                            success: function(response){
+                                $('#resultado').html(response.respuesta);
+                                $('#contador').html(response.contador);
+                            }
+                        })
                     }
                 });
             }
+            // Esta condición es para que cuando se de clic al icono del buscador se contraiga el contenedor del buscador con lso resultados
+            // obtenidos, al igual que muestra el contenedor original de los archivos de la página
             if($(buscador).is(':hidden')){
-                console.log('no está visible');
+                $('#contenidoArchivoBuscador').hide();
+                $('#contenidoArchivos').show();
             }
         });
     });
