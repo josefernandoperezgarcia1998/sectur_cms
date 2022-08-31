@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    {{-- Descripcion del website --}}
+    <meta name="description" content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas" />
+    {{-- Palabras clave del website --}}
+    <meta name="keywords" content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas" />
+    {{-- Autor del website --}}
+    <meta name="author" content="Gobierno del Estado de Chiapas">
+    {{-- Titulo al comaprtie el enlace  --}}
+    <meta property="og:title" content="Secretaría de Turismo">
+    {{-- Imagen del website al momento de compartir un enlace ó el enlace general del sitio --}}
+    <meta property="og:image" content="{{asset('assets/imgs/sectur/logo_sectur.png')}}">
+    {{-- Short name of the website --}}
+    <meta property="og:title" content="SECTUR Chiapas"/>
+    {{-- Enlace completo al ompartir el website --}}
+    <meta property="og:url" content="https://institucional.visitchiapas.com/" />
+    {{-- Descripción que va a tener al compartir el website --}}
+    <meta property="og:description" content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" /> --}}
+    {{-- Estilos de boostrap 5 --}}
     <link href="{{asset('assets/assets-bootstrap/bootstrap-general/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-    
+    {{-- Icono (favicon) para el website --}}
     <link rel="icon" type="image/x-icon" href="{{asset('assets/imgs/sectur/favicon_chiapas.png')}}">
-
+    {{-- Estilo CSS para la animación del menú de navegación --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
+    {{-- En dado caso que el CDN del menu de navegación para animate.min.cs no pueda funcionar aquí está el archivo puro (se debe de descomentar) --}}
+    {{-- <link rel="stylesheet" href="{{asset('assets/navbar/animate.min.css')}}"> --}}
     <title>
         Secretaría de Turismo del Estado de Chiapas
     </title>
-    <meta name="description" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />
-    <meta name="keywords" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />
-
+    {{-- Estilos CSS para el menú de navegación --}}
     <style>
         .dropdown-menu {
             margin-top: 0;
@@ -65,10 +81,10 @@
     <style>
         .fot{
             position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px; /* Set the fixed height of the footer here */
-  line-height: 60px; /* Vertically center the text there */
+            bottom: 0;
+            width: 100%;
+            height: 60px; /* Set the fixed height of the footer here */
+            line-height: 60px; /* Vertically center the text there */
         }
     </style>
 </head>
