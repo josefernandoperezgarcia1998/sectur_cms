@@ -86,6 +86,10 @@
             height: 60px; /* Set the fixed height of the footer here */
             line-height: 60px; /* Vertically center the text there */
         }
+        footer {
+            position: sticky;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -112,27 +116,50 @@
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <div class="alert alert-info">
-            <a href="#">
-                How to use bootNavbar
-            </a>
+    <main class="">
+        <div class="container mt-5">
+            <div class="alert alert-info">
+                <a href="#">
+                    How to use bootNavbar
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="container mt-5">
-        <div class="alert alert-info">
-            <a href="#">
-                How to use bootNavbar
-            </a>
+        <div class="container mt-5">
+            <div class="alert alert-info">
+                <a href="#">
+                    How to use bootNavbar
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="container mt-5">
-        <div class="alert alert-info">
-            <a href="#">
-                How to use bootNavbar
-            </a>
+        <div class="container mt-5">
+            <div class="alert alert-info">
+                <a href="#">
+                    How to use bootNavbar
+                </a>
+            </div>
         </div>
-    </div>
+        <div class="container mt-5">
+            <div class="alert alert-info">
+                <a href="#">
+                    How to use bootNavbar
+                </a>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="alert alert-info">
+                <a href="#">
+                    How to use bootNavbar
+                </a>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="alert alert-info">
+                <a href="#">
+                    How to use bootNavbar
+                </a>
+            </div>
+        </div>
+    </main>
 
         <!-- Footer -->
     @include('layouts.footer')

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Footer;
 use App\Models\Menu;
+use App\Models\Pagina;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class HomeController extends Controller
     {
         $usuarioContador = User::count();
         $menuContador = Menu::count();
+        $paginaContador = Pagina::count();
     
-        return view('dashboard.tablero', compact('usuarioContador', 'menuContador'));
+        return view('dashboard.tablero', compact('usuarioContador', 'menuContador', 'paginaContador'));
     }
 
     // Función que pasa las variables del footer a la pagina de welcome

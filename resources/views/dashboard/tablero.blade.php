@@ -112,16 +112,16 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card  shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">Páginas</h5>
-                                    <p class="card-text">Total de páginas: </p>
+                                    <p class="card-text">Total de páginas: {{$paginaContador}}</p>
                                     <a href="{{route('paginas.index')}}" class="btn btn-primary btn-sm">Ir...</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card  shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">Usuarios</h5>
                                     <p class="card-text">Total de usuarios: {{$usuarioContador}}</p>
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                         <div class="col-sm">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card  shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">Menús</h5>
                                     <p class="card-text">Total de menús: {{$menuContador}}</p>
