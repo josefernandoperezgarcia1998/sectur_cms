@@ -197,9 +197,16 @@
             if($(buscador).is(':visible')){
                 $(buscador).keyup(function(){
                     if($(this).val().length == 0){
+                        // Si el valor del input es 0, o sea está vacío, se debe de mostrar el contenido de la página actual
+                        // Y debe de desaparecer el resultado de la busqueda
                         $('#contenidoArchivos').css('display', 'block');
+                        $('#contenidoArchivoBuscador').css('display','none');
                     }
                     else if($(this).val().length >= 0) {
+                        // Si el valor del input buscador es mayor a 0
+                        // Va a obtener el valor del input, después va a ocultar el contenido de archivos de la página
+                        // Después va a mostrar el contenedor de archivos de busqueda asincrona
+                        // Y por último va a realizar la petición ajax
                         let titulo = $('#buscador').val();
                         $('#contenidoArchivos').css('display', 'none');
                         $('#contenidoArchivoBuscador').css('display', 'block');
@@ -223,7 +230,7 @@
             // Esta condición es para que cuando se de clic al icono del buscador se contraiga el contenedor del buscador con lso resultados
             // obtenidos, al igual que muestra el contenedor original de los archivos de la página
             if($(buscador).is(':hidden')){
-                $('#contenidoArchivoBuscador').hide();
+                $('#contenidoArchivoBuscador').css('display','none');
                 $('#contenidoArchivos').show();
             }
         });

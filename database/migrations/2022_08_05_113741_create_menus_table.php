@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('parent')->default(0);
             $table->smallInteger('order')->default(0);
             $table->boolean('enabled')->default(1);
-            $table->string('enlace')->nullable();
+            $table->longText('enlace')->nullable();
             $table->enum('target',['_blank','_self','_parent','_top'])->default('_blank')->nullable();
             $table->unsignedBigInteger('pagina_id')->nullable();
             $table->foreign('pagina_id')->references('id')->on('paginas');

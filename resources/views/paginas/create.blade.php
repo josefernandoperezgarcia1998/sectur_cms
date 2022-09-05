@@ -94,7 +94,7 @@
         <div class="mb-3">
             {!! Form::label('slug', 'Slug') !!}
             {!! Form::text('slug', null, ['class' => 'form-control', 'readonly' => 'true' ]) !!}
-            @error('titulo')
+            @error('slug')
             <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
@@ -108,7 +108,7 @@
                 {!! Form::radio('imagen_principal_estado', 'No', false, ['id' => 'imagen_principal_estado_no']) !!}
                 No
             </label>
-            @error('status')
+            @error('imagen_principal_estado')
             <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            @error('imagen_principal_estado')
+            @error('imagen_destacada')
             <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
@@ -146,7 +146,7 @@
                 {!! Form::radio('estado', 'No') !!}
                 No
             </label>
-            @error('status')
+            @error('estado')
             <small class="text-danger">{{$message}}</small>
             @enderror
         </div>

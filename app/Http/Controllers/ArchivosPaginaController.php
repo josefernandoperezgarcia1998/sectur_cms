@@ -422,6 +422,8 @@ class ArchivosPaginaController extends Controller
     public function check(Request $request)
     {
 
+        // Se hace la petición AJAX, donde la consulta pide los datos de las páginas por el titulo
+        // Y donde sea la correspondiente página
         if($request->ajax()){
             $archivos = Archivo::where('titulo', 'like', '%'. $request->titulo. '%')
                                 ->where('pagina_id', $request->id)
@@ -430,6 +432,8 @@ class ArchivosPaginaController extends Controller
 
             $respuesta = '';
 
+            // Si existe un conteo mayor a 0 en la consulta va a dar las siguientes coincidencias
+            // Ya sea en documentos, imagenes ó enlaces.
             if(count($archivos) > 0){
                 
                 foreach($archivos as $archivo){

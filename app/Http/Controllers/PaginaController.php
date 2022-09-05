@@ -32,13 +32,15 @@ class PaginaController extends Controller
 
         // Se obtienen todos od datos del request
         $datosPagina = $request->all();
-
-        /*
-
-        Aquí poner las validaciones correspondientes
-
-        */
         
+        /*
+        Aquí poner las validaciones correspondientes
+        */
+        $validated = $request->validate([
+            'titulo'        => 'required',
+            'tipo_pagina'   => 'required',
+            'estado'        => 'required',
+        ]);
 
         // Si existe una imagen destacada en el request se almacena en el storage
         if($request->hasFile('imagen_destacada'))
