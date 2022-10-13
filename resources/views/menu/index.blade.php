@@ -16,7 +16,9 @@
             <div>
                 Menús registrados
             </div>
-            <a href="{{route('menus.create')}}" class="btn btn-primary btn-sm">Nuevo menú</a>
+            @can('admin.menus.create')
+                <a href="{{route('menus.create')}}" class="btn btn-primary btn-sm">Nuevo menú</a>
+            @endcan
         </div>
     </div>
     <div class="card-body">
@@ -96,7 +98,7 @@ $(document).ready(function () {
             'previous': 'Anterior'
             }
         },
-        // Estas lineas de abajo 
+        // Estas lineas de abajo son para mantener la paginación de DataTables
         stateSave: true,
         stateSaveCallback: function(settings,data) {
             localStorage.setItem( 'DataTables_' + settings.sInstance, JSON.stringify(data) )

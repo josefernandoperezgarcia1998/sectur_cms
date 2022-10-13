@@ -1,6 +1,6 @@
 @extends('layouts.general')
 
-@section('title_page', 'Footer')
+@section('title_page', 'Listado de Roles y Permisos')
 
 
 @section('content_page')
@@ -14,22 +14,19 @@
     <div class="carrd-header">
         <div class="d-flex justify-content-between">
             <div>
-                Contenido del footer
+                Roles registrados
             </div>
-            @can('admin.footers.create')
-                <a href="{{route('footers.create')}}" class="btn btn-primary btn-sm">Nuevo contenido</a>
+            @can('admin.roles.create')
+                <a href="{{route('roles.create')}}" class="btn btn-primary btn-sm">Nuevo rol</a>
             @endcan
         </div>
     </div>
     <div class="card-body">
-        <table class="table" id="footerTable">
+        <table class="table" id="rolTable">
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Valor</th>
-                    <th>Enlace</th>
-                    <th>Tipo</th>
-                    <th>activo</th>
+                    <th>Fecha de creación</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -65,15 +62,12 @@
 
 <script>
 $(document).ready(function () {
-    $('#footerTable').DataTable({
+    $('#rolTable').DataTable({
         "serverSide": true,
-        "ajax": "{{ url('footers-data') }}",
+        "ajax": "{{ url('roles-data') }}",
         "columns": [
-            {data: 'nombre'},
-            {data: 'valor'},
-            {data: 'enlace'},
-            {data: 'tipo'},
-            {data: 'estado'},
+            {data: 'name'},
+            {data: 'created_at'},
             {data: 'btn'},
         ],
         responsive: true,
@@ -98,7 +92,7 @@ $(document).ready(function () {
             'previous': 'Anterior'
             }
         },
-        // Estas lineas de abajo son para mantener el estado de la paginación de DataTables
+        // Estas lineas de abajo son para poder mantener el estado de una paginación con DataTables
         stateSave: true,
         stateSaveCallback: function(settings,data) {
             localStorage.setItem( 'DataTables_' + settings.sInstance, JSON.stringify(data) )

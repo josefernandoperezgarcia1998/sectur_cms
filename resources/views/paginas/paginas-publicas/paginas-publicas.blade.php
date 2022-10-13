@@ -106,7 +106,7 @@
             @endif
 
         @empty
-        
+        <p class="h6">No se encuentran archivos dentro de esta página</p>
         @endforelse
     </div>
     <div class="px-5" id="contenidoArchivoBuscador" style="display: none;">
@@ -123,7 +123,7 @@
         </tr>
         <tr>
             <th class="table-active">Actualización</th>
-            <td>{{$page->updated_at->isoFormat('LLLL'),}}</td>
+            <td>{{$page->updated_at->isoFormat('LLLL')}}</td>
         </tr>
     </table>
 </div>

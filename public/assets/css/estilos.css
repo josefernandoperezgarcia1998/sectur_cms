@@ -1,0 +1,10 @@
+/*
+    Estilo CSS para el footer de las páginas públicas 
+    y para los errores del sistema, este estilo se va a aplicar unicamente cuando el mediaquery llegue 
+    a ese tamaño de la pantalla (1400px)
+*/
+@media (min-width: 1400px) { 
+    .contenedor-general{
+        height: 70vh;
+    }
+}

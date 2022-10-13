@@ -59,34 +59,99 @@
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
+                        @can('admin.dashboard')
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">
-                                <span data-feather="home"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                                    <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+                                </svg>
                                 Tablero
                             </a>
                         </li>
+                        @endcan
+                        {{-- @role('Admin') --}}
+                        @can('admin.paginas.index')
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('paginas.index')}}">
-                                <span data-feather="file"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
+                                    <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                                    <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                </svg>
                                 Paginas
                             </a>
                         </li>
+                        @endcan
+                        {{-- @endrole --}}
+                        @unlessrole('Admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('paginas.paginas-empleados')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
+                                    <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                                    <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                </svg>
+                                Paginas empleados
+                            </a>
+                        </li>
+                        @endunlessrole
+                        @can('admin.menus.index')
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('menus.index')}}">
-                                <span data-feather="shopping-cart"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-button" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h8A1.5 1.5 0 0 1 11 1.5v2A1.5 1.5 0 0 1 9.5 5h-8A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-8z"/>
+                                    <path d="m7.823 2.823-.396-.396A.25.25 0 0 1 7.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
                                 Menú
                             </a>
                         </li>
-                        <li class="nav-item">
+                        @endcan
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{route('usuarios.index')}}">
                                 <span data-feather="users"></span>
                                 Usuarios
                             </a>
-                        </li>
+                        </li> --}}
+                        @can('admin.footers.index')
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('footers.index')}}">
-                                <span data-feather="users"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                                </svg>
                                 Footer
+                            </a>
+                        </li>
+                        @endcan
+                        @can('admin.users.index')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('users.index')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                            </svg>
+                                Usuarios
+                            </a>
+                        </li>
+                        @endcan
+                        @can('admin.roles.index')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('roles.index')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                                </svg>
+                                Roles
+                            </a>
+                        </li>
+                        @endcan
+                        <li class="mb-1">
+                            <a href="{{ route('salir') }}" class="btn align-items-center rounded collapsed">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
+                                    <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
+                                </svg>
+                                Cerrar Sesión
                             </a>
                         </li>
                     </ul>
@@ -110,7 +175,10 @@
 
                 </div>
                 <div class="container">
+                    <h5 class="text-secondary">Bienvenido {{Auth::user()->name}}.</h5>
+                    <br>
                     <div class="row">
+                        @role('Admin')
                         <div class="col-sm">
                             <div class="card  shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                                 <div class="card-body">
@@ -138,15 +206,19 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-sm">
-                            <div class="card" style="width: 18rem;">
+                        @else
+                        @endrole
+                        @unlessrole('Admin')
+                        <div class="col-sm">
+                            <div class="card  shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title">Usuarios</h5>
-                                    <p class="card-text">Total de usuarios: </p>
-                                    <a href="#" class="btn btn-primary btn-sm">Ir...</a>
+                                    <h5 class="card-title">Páginas asignadas</h5>
+                                    <p class="card-text">Total de páginas: {{$paginasUsuarioAutenticado}}</p>
+                                    <a href="{{route('paginas.paginas-empleados')}}" class="btn btn-primary btn-sm">Ir...</a>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
+                        @endunlessrole
                     </div>
                 </div>
             </main>

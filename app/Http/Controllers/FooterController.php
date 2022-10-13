@@ -8,7 +8,14 @@ use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 class FooterController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('can:admin.footers.index')->only('index');
+        $this->middleware('can:admin.footers.create')->only('create', 'store');
+        $this->middleware('can:admin.footers.edit')->only('edit', 'update');
+        $this->middleware('can:admin.footers.destroy')->only('destroy');
+    }
+
     public function index()
     {
         return view(('footer.index'));
@@ -37,7 +44,7 @@ class FooterController extends Controller
 
     public function edit($id)
     {
-        $contenidoFooter = Footer::find($id);
+        $contenidoFooter = Footer::findOrFail($id);
 
         return view('footer.edit', compact('contenidoFooter'));
     }

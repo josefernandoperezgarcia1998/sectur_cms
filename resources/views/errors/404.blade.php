@@ -5,9 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     {{-- Descripcion del website --}}
-    <meta name="description" content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas" />
+    <meta name="description"
+        content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas" />
     {{-- Palabras clave del website --}}
-    <meta name="keywords" content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas" />
+    <meta name="keywords"
+        content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas" />
     {{-- Autor del website --}}
     <meta name="author" content="Gobierno del Estado de Chiapas">
     {{-- Titulo al comaprtie el enlace  --}}
@@ -15,11 +17,12 @@
     {{-- Imagen del website al momento de compartir un enlace ó el enlace general del sitio --}}
     <meta property="og:image" content="{{asset('assets/imgs/sectur/logo_sectur.png')}}">
     {{-- Short name of the website --}}
-    <meta property="og:title" content="SECTUR Chiapas"/>
+    <meta property="og:title" content="SECTUR Chiapas" />
     {{-- Enlace completo al ompartir el website --}}
     <meta property="og:url" content="https://institucional.visitchiapas.com/" />
     {{-- Descripción que va a tener al compartir el website --}}
-    <meta property="og:description" content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas">
+    <meta property="og:description"
+        content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" /> --}}
@@ -79,28 +82,30 @@
     </style>
 
     <style>
-        .fot{
+        .fot {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 60px; /* Set the fixed height of the footer here */
-            line-height: 60px; /* Vertically center the text there */
+            height: 60px;
+            /* Set the fixed height of the footer here */
+            line-height: 60px;
+            /* Vertically center the text there */
         }
+
         footer {
             position: sticky;
             width: 100%;
         }
-    </style>
 
-    {{-- Link de estilos generales para el sistema--}}
-    <link rel="stylesheet" href="{{asset('assets/css/estilos.css')}}">
+    </style>
+     <link rel="stylesheet" href="{{asset('assets/css/estilos.css')}}">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{route('inicio')}}"><img
-                src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas"></a>
+                    src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -109,33 +114,52 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @foreach ($menus as $key => $item)
-                        @if ($item['parent'] != 0)
-                            @break
-                        @endif
-                        @include('shared.navbar', ['item' => $item])
+                    @if ($item['parent'] != 0)
+                    @break
+                    @endif
+                    @include('shared.navbar', ['item' => $item])
                     @endforeach
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main class="contenedor-general">
-        <div class="container mt-5">
-            <div class="alert alert-info">
-                <a href="#">
-                    How to use bootNavbar
-                </a>
+    <div class="contenedor-general">
+        <main class="container mt-5 shadow p-3 mb-5 bg-body rounded">
+            <div >
+                <div class="card border-0">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h2 class="display-5">
+                                Error 404
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="d-flex flex-column">
+                                    {{-- <img class="img-thumbnail" src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="Imagen de error" height="70" width="154"> --}}
+                                    <h2>Página no encontrada</h2>
+                                    <p>Lo sentimos, pero la acción que quieres realizar no se encuentra en nuestro sistema, si necesitas acceder a algún contenido específico del <a href="/" style="text-decoration: none;">Sitio Institucional de la Secretaría de Turismo</a> te pedimos contactarte con el administrador del sitio.</p>
+                                    <div class="text-center">
+                                        <a href="/" class="btn btn-primary btn-sm w-25">Volver al inicio</a>
+                                        @auth
+                                            <a href="{{route('dashboard')}}" class="btn btn-secondary btn-sm w-25">Ir al tablero</a>
+                                        @endauth
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="container mt-5">
-            <h3 class="display-6">Ubicación</h3>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3820.442215140926!2d-93.08337298558745!3d16.754660525155153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1141cfc8565cf697%3A0xd55baf4cb4d656ed!2sSecretar%C3%ADa%20de%20Turismo%20del%20Gobierno%20de%20Chiapas!5e0!3m2!1ses!2smx!4v1662564573468!5m2!1ses!2smx" style="width: 100%;" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </main>
+        </main>
+    </div>
 
-        <!-- Footer -->
+    <!-- Footer -->
     @include('layouts.footer')
-        <!-- Footer -->
+    <!-- Footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

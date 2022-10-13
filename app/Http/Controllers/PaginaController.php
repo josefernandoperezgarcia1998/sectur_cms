@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Archivo;
 use App\Models\Footer;
 use App\Models\Menu;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
@@ -15,13 +17,20 @@ use Illuminate\Support\Str;
 
 class PaginaController extends Controller
 {
-    public function index()
+
+    public function __construct()
     {
-        $paginas = Pagina::latest('created_at')->paginate(5);
-        return view('paginas.index', compact('paginas'));
+        $this->middleware('can:admin.paginas.index')->only('index');
+        $this->middleware('can:admin.paginas.create')->only('create', 'store');
+        $this->middleware('can:admin.paginas.edit')->only('edit', 'update');
+        $this->middleware('can:admin.paginas.destroy')->only('destroy');
     }
 
-
+    public function index()
+    {
+        return view('paginas.index');
+    }
+    
     public function create()
     {
         return view('paginas.create');
@@ -191,12 +200,62 @@ class PaginaController extends Controller
      */
     public function paginasDatatables()
     {
-        return FacadesDataTables::eloquent(\App\Models\Pagina::orderBy('created_at', 'asc'))
-                ->addColumn('btn', function(Pagina $pagina) {
-                    return view('paginas.actions', compact('pagina'));
-                })
-                ->rawColumns(['btn'])
-                ->toJson();
+            return FacadesDataTables::eloquent(\App\Models\Pagina::orderBy('created_at', 'asc'))
+                                    ->addColumn('btn', function(Pagina $pagina) {
+                                        return view('paginas.actions', compact('pagina'));
+                                    })
+                                    ->rawColumns(['btn'])
+                                    ->toJson();
+    }
+
+    // Función que permite hacer la consulta de las páginas que tiene asignadas un usuario 
+    // dentro del sistemas
+    public function paginasEmpleados()
+    {
+        // Se obtiene el usuario autenticado por ID
+        $usuario = User::where('id', auth::user()->id)->get();
+
+        // Se crea un arreglo vacío para almacenar las páginas encontradas con Datatables
+        $page = [];
+
+        // Se crea un arreglo vacío que va a almacenar las páginas finales encontradas
+        $paginasEncontradas = [];
+
+        // Se crea un ciclo que va a recorrer por las páginas encontradas del usuario autenticado
+        foreach($usuario as $key => $usr)
+        {
+            // Se crea un ciclo anidado que va a ir encontrando las páginas según las que tenga asignadas un usuario
+            foreach($usr->paginas as $pagina)
+            {
+                // Las páginas encontradas se van a ir almacenando en el arreglo "page", cada página encontrada
+                // Es un espacio del arreglo. Aunado que obtendrá la págin, también va a obtener toda la información
+                // De la página, atributos junto con los botones de acciones (Editar, Ver, Eliminar)
+                $page[] = FacadesDataTables::eloquent(\App\Models\Pagina::orderBy('created_at', 'asc')->where('id', $pagina))
+                            ->addColumn('btn', function(Pagina $pagina) {
+                                return view('paginas.actions', compact('pagina'));
+                            })
+                            ->rawColumns(['btn'])
+                            ->toJson();
+            }
+            
+        }
+        // Se crea un ciclo para hacer una iteración por el tamaño de páginas encontradas asignadas a un usuario.
+        // Por ejemplo, si un usuario tiene 3 páginas asignadas, va a tener 3 recorrdos este ciclo.
+        // El ciclo va a guardar dentro del arreglo "$paginasEncontradas" los atributos "data" de un objeto ResponseJson
+        // Y por cadda página que vaya encontrando va a ir guardandolos en un espacio dentro del arreglo.
+        // Nota: getData() es un objeto
+        foreach ($page as $key => $paginas) {
+            $paginasEncontradas[] = $paginas->getData();
+        }
+
+        // Se crea un último arreglo para que por cada objeto que haya sido almacenado en "paginasEncontradas" se obtengan
+        // Loa atributos/propiedades de ese objeto, para acceder a esos datos se usa "$item->data"
+        $paginasNuevas = [];
+        foreach ($paginasEncontradas as $item) {
+            $paginasNuevas[] = $item->data;
+        }
+        
+        return view('paginas.paginas-empleados')->with('paginas', collect($paginasNuevas));
     }
 
     /**

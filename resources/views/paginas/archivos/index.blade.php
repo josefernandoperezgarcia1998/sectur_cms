@@ -16,8 +16,15 @@
                 Listado de archivos de la página "<strong>{{$pagina->titulo}}</strong>"
             </div>
             <div>
-                <a href="{{route('paginas.index')}}" class="btn btn-secondary btn-sm">Volver</a>
-                <a href="{{route('paginas-archivos.create', $pagina)}}" class="btn btn-primary btn-sm">Nuevo archivo</a>
+                @role('Admin')
+                    <a href="{{route('paginas.index')}}" class="btn btn-secondary btn-sm">Volver</a>
+                @endrole
+                @unlessrole('Admin')
+                    <a href="{{route('paginas.paginas-empleados')}}" class="btn btn-secondary btn-sm">Volver</a>
+                @endunlessrole
+                @can('admin.paginas-archivos.create')
+                    <a href="{{route('paginas-archivos.create', $pagina)}}" class="btn btn-primary btn-sm">Nuevo archivo</a>
+                @endcan
             </div>
         </div>
     </div>

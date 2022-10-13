@@ -1,6 +1,6 @@
 @extends('layouts.general')
 
-@section('title_page', 'Footer')
+@section('title_page', 'Usuarios')
 
 
 @section('content_page')
@@ -14,22 +14,21 @@
     <div class="carrd-header">
         <div class="d-flex justify-content-between">
             <div>
-                Contenido del footer
+                Usuarios registrados
             </div>
-            @can('admin.footers.create')
-                <a href="{{route('footers.create')}}" class="btn btn-primary btn-sm">Nuevo contenido</a>
+            @can('admin.users.create')
+                <a href="{{route('users.create')}}" class="btn btn-primary btn-sm">Nuevo usuario</a>
             @endcan
         </div>
     </div>
     <div class="card-body">
-        <table class="table" id="footerTable">
+        <table class="table" id="userTable">
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Valor</th>
-                    <th>Enlace</th>
-                    <th>Tipo</th>
-                    <th>activo</th>
+                    <th>Correo</th>
+                    {{-- <th>Rol</th> --}}
+                    <th>Activo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -65,14 +64,13 @@
 
 <script>
 $(document).ready(function () {
-    $('#footerTable').DataTable({
+    $('#userTable').DataTable({
         "serverSide": true,
-        "ajax": "{{ url('footers-data') }}",
+        "ajax": "{{ url('users-data') }}",
         "columns": [
-            {data: 'nombre'},
-            {data: 'valor'},
-            {data: 'enlace'},
-            {data: 'tipo'},
+            {data: 'name'},
+            {data: 'email'},
+            // {data: '{{ Auth::user()->roles->pluck("name") }}'},
             {data: 'estado'},
             {data: 'btn'},
         ],
@@ -98,7 +96,7 @@ $(document).ready(function () {
             'previous': 'Anterior'
             }
         },
-        // Estas lineas de abajo son para mantener el estado de la paginación de DataTables
+        // Estas lineas de abajo son para mantener el estado de la paginación en DataTables
         stateSave: true,
         stateSaveCallback: function(settings,data) {
             localStorage.setItem( 'DataTables_' + settings.sInstance, JSON.stringify(data) )

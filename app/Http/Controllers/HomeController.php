@@ -16,8 +16,14 @@ class HomeController extends Controller
         $usuarioContador = User::count();
         $menuContador = Menu::count();
         $paginaContador = Pagina::count();
-    
-        return view('dashboard.tablero', compact('usuarioContador', 'menuContador', 'paginaContador'));
+        
+        // Obtener la cantidad de páginas del usuario autenticado
+        $paginasContadorUsuarioAuth = User::select('paginas')->get();
+        $paginasUsuario = [];
+        $paginasUsuario = $paginasContadorUsuarioAuth[1]->paginas;
+        $paginasUsuarioAutenticado = collect($paginasUsuario)->count();
+
+        return view('dashboard.tablero', compact('usuarioContador', 'menuContador', 'paginaContador', 'paginasUsuarioAutenticado'));
     }
 
     // Función que pasa las variables del footer a la pagina de welcome

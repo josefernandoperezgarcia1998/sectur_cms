@@ -10,6 +10,15 @@ use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 class MenuController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('can:admin.menus.index')->only('index');
+        $this->middleware('can:admin.menus.create')->only('create', 'store');
+        $this->middleware('can:admin.menus.edit')->only('edit', 'update');
+        $this->middleware('can:admin.menus.destroy')->only('destroy');
+    }
+
     public function index()
     {
         return view('menu.index');
@@ -113,6 +122,8 @@ class MenuController extends Controller
                 ->toJson();
     }
 
+    // Función que permite verificar de forma asincrona con AJAX 
+    // si un SLUG ya existe dentro del sistema en el apartado de Menús
     function check(Request $request)
     {
         if($request->get('slug'))

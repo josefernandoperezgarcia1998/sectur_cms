@@ -16,6 +16,7 @@
     <meta name="description" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />
     <meta name="keywords" content="Multi level hover dropdown Navbar for bootstrap 4 and bootstrap 5" />
     @stack('css')
+    {{-- Estilo CSS para el menu --}}
     <style>
         .dropdown-menu {
             margin-top: 0;
@@ -58,6 +59,8 @@
         }
 
     </style>
+    {{-- Link de estilos generales para el sistema--}}
+    <link rel="stylesheet" href="{{asset('assets/css/estilos.css')}}">
 </head>
 
 <body id="cuerpo">
@@ -83,9 +86,11 @@
         </div>
     </nav>
 
-    <div class="container mt-5 shadow p-3 mb-5 bg-body rounded">
-        <h3>@yield('titulo_pagina')</h3>
-        @yield('contenido')
+    <div class="contedor-general">
+        <div class="container mt-5 shadow p-3 mb-5 bg-body rounded cuerpo">
+            <h3>@yield('titulo_pagina')</h3>
+            @yield('contenido')
+        </div>
     </div>
     {{-- Footer --}}
     {{-- <div class="footer-container col-16 bg-dark">

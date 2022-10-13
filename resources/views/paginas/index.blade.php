@@ -15,7 +15,9 @@
             <div>
                 Páginas registradas
             </div>
-            <a href="{{route('paginas.create')}}" class="btn btn-primary btn-sm">Nueva página</a>
+            @can('admin.paginas.create')
+                <a href="{{route('paginas.create')}}" class="btn btn-primary btn-sm">Nueva página</a>
+            @endcan
         </div>
     </div>
     <div class="card-body">
@@ -92,7 +94,7 @@ $(document).ready(function () {
             }
         },
 
-        // Estas lineas de abajo 
+        // Estas lineas de abajo son para mantener la paginación de DataTables
         stateSave: true,
         stateSaveCallback: function(settings,data) {
             localStorage.setItem( 'DataTables_' + settings.sInstance, JSON.stringify(data) )
