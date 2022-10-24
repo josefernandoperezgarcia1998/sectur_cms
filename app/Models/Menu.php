@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 
 class Menu extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'name',
@@ -58,5 +61,12 @@ class Menu extends Model
         return $this->hasMany(Pagina::class);
     }
 
-
+    // Agregué esta función para poder utilizar LogActivity, sin esta funcion marca error
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+                    ->logAll()
+                    ->useLogName('Menú')
+                    ->setDescriptionForEvent(fn(string $eventName) => "Se ha {$eventName} el menú");
+    }
 }

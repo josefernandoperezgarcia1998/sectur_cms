@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Pagina extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'titulo',
@@ -33,16 +35,18 @@ class Pagina extends Model
     {
         return $this->hasMany(ImagesCkeditor::class);
     }
-    
-    // protected function slug(): Pagina
-    // {
-    //     return Pagina::make(
-    //         get: fn ($value) => ucfirst($value),
-    //     );
-    // }
 
     public function archivos()
     {
         return $this->hasMany(Archivo::class);
+    }
+
+    // Agregué esta función para poder utilizar LogActivity, sin esta funcion marca error
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+                    ->logAll()
+                    ->useLogName('Página')
+                    ->setDescriptionForEvent(fn(string $eventName) => "Se ha {$eventName} la página");
     }
 }

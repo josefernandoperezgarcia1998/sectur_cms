@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ArchivosPaginaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AutenticarController;
@@ -10,8 +11,7 @@ use App\Http\Controllers\PaginaController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
-use App\Models\Archivo;
-use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
+use Spatie\Activitylog\Models\Activity;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -74,9 +74,16 @@ Route::get('paginas-data-archivos', [ArchivosPaginaController::class, 'paginasAr
 // Ruta con AJAX para encontrar archivos dentro con base a una poágina en especifica
 Route::get('paginas-archivos-check', [ArchivosPaginaController::class, 'check'])->name('paginas-archivos.paginas-archivos-check');
 
+// Ruta resource para las actividades de los logs
+Route::resource('activity-logs', ActivityLogController::class)->names('activity-logs');
+
+// Ruta con ajax para obtener toda la data de archivos de una activitylogs con datatables
+Route::get('activity-logs-data', [ActivityLogController::class, 'activityLogsDatatables'])->name('activity-logs-data');
 
 Route::get('prueba', function() {
-   dd(session()->all());
+   // dd(session()->all());
+   // return Activity::all();
+   return Activity::orderBy('id','desc')->get();
    });
 
 // Ruta con ajax para obtener toda la data de paginas con datatables
