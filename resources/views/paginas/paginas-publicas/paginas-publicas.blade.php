@@ -10,35 +10,41 @@
 <div class="card" style="border:none;">
     {{-- Este ciclo es por si la pagina tiene información interna como imagen, algún contenido texto/imagen --}}
     @foreach ($pagina as $page)
-    <div class="card-header">
-        <div class="d-flex justify-content-between">
-            <div>
-                <h1 class="display-6">{{$page->titulo}}</h1>
-                <input type="hidden" name="paginaId" id="paginaId" value="{{$page->id}}">
-            </div>
-            <div class="pt-3 d-flex">
+    @if ($page->estado == 'No')
+        @include('paginas.pagina-inactiva')
+    @else
+        {{-- Inicia --}}
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
                 <div>
-                    <input type="text" id="buscador" class="form-control" style="display: none;">
+                    <h1 class="display-6">{{$page->titulo}}</h1>
+                    <input type="hidden" name="paginaId" id="paginaId" value="{{$page->id}}">
                 </div>
-                <div>
-                    <svg id="iconoBuscador" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
+                <div class="pt-3 d-flex">
+                    <div>
+                        <input type="text" id="buscador" class="form-control" style="display: none;">
+                    </div>
+                    <div>
+                        <svg id="iconoBuscador" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                    
                 </div>
-                
             </div>
         </div>
-    </div>
-    <div class="card-body">
-        @if (is_null($page->imagen_destacada) || $page->imagen_principal_estado == 'No')
-
-        @else
-        <img src="{{asset('storage').'/'.$page->imagen_destacada}}" alt="imagen"
-            class="img-fluid rounded mx-auto d-block">
-        @endif
-        <hr>
-        <div class="contenedor">{!!$page->contenido!!}</div>
-    </div>
+        <div class="card-body">
+            @if (is_null($page->imagen_destacada) || $page->imagen_principal_estado == 'No')
+    
+            @else
+            <img src="{{asset('storage').'/'.$page->imagen_destacada}}" alt="imagen"
+                class="img-fluid rounded mx-auto d-block">
+            @endif
+            <hr>
+            <div class="contenedor">{!!$page->contenido!!}</div>
+        </div>
+        {{-- Termina --}}
+    @endif
     @endforeach
     {{-- Este ciclo es para recorrer todos los archivos de la página actual --}}
     <div class="px-5" id="contenidoArchivos">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
@@ -61,9 +61,96 @@
     </style>
     {{-- Link de estilos generales para el sistema--}}
     <link rel="stylesheet" href="{{asset('assets/css/estilos.css')}}">
+{{-- Inicia links de chiapas.gob.mx --}}
+
+				<!-- Google Fonts -->
+				<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
+
+				<!-- CSS Global Compulsory -->
+                
+				{{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/bootstrap/bootstrap.min.css')}}"> --}}
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/bootstrap/offcanvas.css')}}">
+
+				<!-- CSS Implementing Plugins -->
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/icon-awesome/css/font-awesome.min.css')}}">
+				{{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/icon-line-pro/style.css')}}"> --}}
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/icon-line/css/simple-line-icons.css')}}">
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/icon-hs/style.css')}}">
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/dzsparallaxer.css')}}">
+				{{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/dzsscroller/scroller.css')}}"> --}}
+				{{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/advancedscroller/plugin.css')}}"> --}}
+				{{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/animate.css')}}"> --}}
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets//vendor/typedjs/typed.css')}}">
+				{{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/hamburgers/hamburgers.min.css')}}"> --}}
+				{{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/fancybox/jquery.fancybox.css')}}"> --}}
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/slick-carousel/slick/slick.css')}}">
+
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/css/unify-core.css')}}">
+				{{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/css/unify-components.css')}}"> --}}
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/css/unify-globals.css')}}">
+
+				<link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/css/custom.css')}}">
+
+                {{-- Estilos para el banner institucional --}}
+                <style>
+                    .probando-banner-institucional-normal{
+                        height: 100%; 
+                        background-image: url({{url('assets/plantilla-chiapas-gob/assets/img-temporal/1920x1080/banner-general-turismo.png')}});
+                    }
+                    .probando-banner-institucional-movil{
+                        display: none;
+                    }
+
+                    @media only screen and (max-width: 770px) {
+                        .probando-banner-institucional-normal{
+                            display: none;
+                        }
+                        
+                        .probando-banner-institucional-movil{
+                            display: block;
+                            height: 100%; 
+                            background-image: url({{url('assets/plantilla-chiapas-gob/assets/img-temporal/1920x1080/banner-general-turismo-movil.png')}});
+                        }
+                    }
+                </style>
+{{-- Termina links de chiapas.gob.mx --}}
+    
 </head>
 
 <body id="cuerpo">
+        {{-- test 1 chiapas.gob.mx navbar --}}
+        <header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section fixed-top" data-header-fix-moment="300">	
+            <div class="u-header__section u-header__section--light  g-transition-0_3 d-flex justify-content-center" data-header-fix-moment-exclude="" data-header-fix-moment-classes="u-shadow-v18 g-py-0" style="background-color: #333">
+                <nav class="navbar navbar-expand-lg g-pa-0 g-pt-4 g-pb-4">
+                    <div class="container">
+                        <div class="d-flex">
+                            <div class="">
+                                <a href="https://www.chiapas.gob.mx/" class="navbar-brand g-text-underline--hover"><img src="{{asset('assets/plantilla-chiapas-gob/assets/logo/escudo-icono.png')}}" alt="logo-chiapas"></a>
+                                <a href="https://www.chiapas.gob.mx/" class="g-color-white-opacity-0_9 g-font-size-16 g-font-weight-300 g-font-secondary g-text-underline--hover" style="color: rgba(255, 255, 255, 0.9) !important; text-decoration: none;">chiapas<span class="g-color-white-opacity-0_6" style="color: rgba(255, 255, 255, 0.6) !important">.gob.mx</span></a>
+                            </div>
+                            {{-- <div class="separador">
+
+                            </div> --}}
+                            {{-- <div class="">
+                                <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
+                                    <ul class="navbar-nav ml-auto g-font-size-16 g-font-weight-100">
+                                        <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/tramites" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Trámites</a></li>
+                                        <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/gobierno" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Gobierno</a></li>
+                                        <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/participa" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Participa</a></li>
+                                        <li class="nav-item g-mx-10--lg lis"><a href="http://gubernatura.transparencia.chiapas.gob.mx/" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Transparencia</a></li>
+                                        <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/busquedas" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg></a></li>
+                                    </ul>
+                                </div>
+                            </div> --}}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <br><br>
+    {{-- test 2 --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{route('inicio')}}"><img

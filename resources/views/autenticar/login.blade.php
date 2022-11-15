@@ -1,19 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.101.0">
-    <title>Iniciar sesión</title>
+    {{-- Descripcion del website --}}
+    <meta name="description" content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas" />
+    {{-- Palabras clave del website --}}
+    <meta name="keywords" content="Página institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas" />
+    {{-- Autor del website --}}
+    <meta name="author" content="Gobierno del Estado de Chiapas">
+    {{-- Titulo al comaprtie el enlace  --}}
+    <meta property="og:title" content="Secretaría de Turismo">
+    {{-- Short name of the website --}}
+    <meta property="og:title" content="Secretaría de Turismo - Chiapas"/>
+    {{-- Enlace completo al ompartir el website --}}
+    <meta property="og:url" content="https://institucional.visitchiapas.com/"/>
+    {{-- Descripción que va a tener al compartir el website --}}
+    <meta property="og:description" content="Página Institucional de la Secretaría de Turismo del Gobierno del Estado de Chiapas">
+    {{-- Icono (favicon) para el website --}}
+    <link rel="icon" type="image/x-icon" href="{{asset('assets/imgs/sectur/favicon_chiapas.png')}}">
+    
+    <title>Secretaría de Turismo - Iniciar sesión</title>
 
     <link href="{{asset('assets/assets-bootstrap/bootstrap-general/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/assets-bootstrap/bootstrap-login/sign-in.css')}}" rel="stylesheet">
 
     <!-- Favicons -->
-    <link rel="icon" href="{{asset('assets/img/favicon_chiapas.png')}}">
+    <link rel="icon" href="{{asset('assets/imgs/sectur/favicon_chiapas.png')}}">
     <meta name="theme-color" content="#712cf9">
 
     <style>
@@ -89,26 +103,36 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <form action="{{ route('validar') }}" enctype="multipart/form-data" method="POST">
-            @csrf
-            <img src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas" >
-            <h1 class="h3 mb-3 fw-normal">Inicia Sesión</h1>
-
-            <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email"
-                    value="{{ old('email') }}">
-                <label for="floatingInput">Correo electrónico</label>
+        <div class="card shadow p-3 mb-5 bg-body rounded">
+            <div class="card-header">
+                <h1 class="fs-6">Inicia Sesión</h1>
+                <img src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas" >
             </div>
-            <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                    name="password">
-                <label for="floatingPassword">Contraseña</label>
+            <div class="card-body">
+                <form action="{{ route('validar') }}" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email"
+                            value="{{ old('email') }}">
+                        <label for="floatingInput">Correo electrónico</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="password" placeholder="Password"
+                            name="password">
+                        <label for="floatingPassword">Contraseña</label>
+                    </div>
+                    <br>
+                    <button class="w-100 btn btn-sm btn-primary" type="submit">Entrar</button>
+                </form>
             </div>
-
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
-            <p class="mt-5 mb-3 text-muted">&copy; U. Informática - Secretaría de Turismo</p>
-        </form>
+            <div class="card-footer">
+                <p class="text-muted">&copy; Secretaría de Turismo</p>
+            </div>
+        </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

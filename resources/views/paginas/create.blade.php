@@ -177,7 +177,8 @@
 
 @push('js')
 <script src="{{asset('assets/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js')}}"></script>
-<script src="{{asset('vendor/ckeditor5-build-classic/build/ckeditor.js')}}"></script>
+{{-- <script src="{{asset('vendor/ckeditor5-build-classic/build/ckeditor.js')}}"></script> --}}
+<script src="{{asset('vendor/ckeditor-images-and-html-embebed/build/ckeditor.js')}}"></script>
 
 {{-- Script para poder usar el slug --}}
 <script>

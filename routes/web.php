@@ -11,13 +11,15 @@ use App\Http\Controllers\PaginaController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SeccionController;
+use App\Http\Controllers\SubSeccionController;
 use Spatie\Activitylog\Models\Activity;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('inicio');
 
-Route::get('/', [HomeController::class,'welcome'])->name('inicio');
+Route::get('/', [SeccionController::class,'bienvenida'])->name('inicio');
 
 
 // Vista al dashboard ó tablero principal
@@ -74,6 +76,15 @@ Route::get('paginas-data-archivos', [ArchivosPaginaController::class, 'paginasAr
 // Ruta con AJAX para encontrar archivos dentro con base a una poágina en especifica
 Route::get('paginas-archivos-check', [ArchivosPaginaController::class, 'check'])->name('paginas-archivos.paginas-archivos-check');
 
+// Ruta resource secion de inicio (welcome)
+Route::resource('seccion-inicio', SeccionController::class)->names('seccion-inicio');
+
+// Ruta con ajax para obtener toda la data de usuarios con datatables
+Route::get('seccion-inicio-data', [SeccionController::class, 'seccionesDatatables'])->name('seccion-inicio-data');
+
+//Ruta resource para las subsecciones que tenga una seccion de inicio
+Route::resource('subseccion', SubSeccionController::class)->names('subseccion');
+
 // Ruta resource para las actividades de los logs
 Route::resource('activity-logs', ActivityLogController::class)->names('activity-logs');
 
@@ -103,7 +114,7 @@ Route::get('paginas/{pagina}/archivos',[ArchivosPaginaController::class, 'index'
 Route::resource('archivos', ArchivosPaginaController::class)->names('paginas-archivos');
 
 
-
+// ruta para crear archivos de paginas
 Route::get('archivos/create/{pagina}/archivo', [ArchivosPaginaController::class, 'create'])->name('paginas-archivos.create');
 
 // Ruta para ajax - buscar un paginas con select2 

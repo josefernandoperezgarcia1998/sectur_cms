@@ -187,7 +187,7 @@ class UserController extends Controller
 
     public function usersDatatables()
     {
-        return FacadesDataTables::eloquent(\App\Models\User::orderBy('rol', 'asc'))
+        return FacadesDataTables::eloquent(\App\Models\User::orderBy('name', 'asc'))
                 ->addColumn('btn', 'users.actions')
                 ->rawColumns(['btn'])
                 ->toJson();
