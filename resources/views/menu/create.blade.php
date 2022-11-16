@@ -15,6 +15,14 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
+@error('g-recaptcha-response')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>    
+            <span class="text-danger error-text">{{$message}}</span>                
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@enderror
 <div class="card shadow p-3 mb-5 bg-body rounded">
     <div class="carrd-header">
         <div class="d-flex justify-content-between">
@@ -34,6 +42,9 @@
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
                                     autocomplete="off" required>
+                                    @error('name')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                             </div>
                         </div>
                         <div class="col">
@@ -131,6 +142,9 @@
                                     <option {{ old('enabled') == '1' ? 'selected' : '' }} value="1">Si</option>
                                     <option {{ old('enabled') == '0' ? 'selected' : '' }} value="0">No</option>
                                 </select>
+                                    @error('enabled')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                             </div>
                         </div>
                         <div class="col">
@@ -138,6 +152,9 @@
                                 <label for="nombre" class="form-label">Orden</label>
                                 <input type="number" class="form-control w-50" id="order" name="order" value="{{ old('order') }}"
                                     autocomplete="off" required>
+                                    @error('order')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                             </div>
                         </div>
                     </div>

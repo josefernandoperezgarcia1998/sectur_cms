@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pagina;
 use App\Models\Archivo;
+use App\Rules\Recaptcha;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Session\Session;
@@ -54,10 +55,11 @@ class ArchivosPaginaController extends Controller
         $archivoData = $request->all();
 
         $validated = $request->validate([
-            'titulo' => 'required',
-            'imagen' => 'mimes:jpg,jpeg,png',
-            'documento' => 'mimes:doc,pdf,docx,xlsx',
-            'estado' => 'required',
+            'titulo'                => 'required',
+            'imagen'                => 'mimes:jpg,jpeg,png',
+            'documento'             => 'mimes:doc,pdf,docx,xlsx',
+            'estado'                => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
         
         if($request->hasFile('imagen')){
@@ -196,10 +198,11 @@ class ArchivosPaginaController extends Controller
         $archivo = Archivo::find($id);
 
         $validated = $request->validate([
-            'titulo' => 'required',
-            'imagen' => 'mimes:jpg,jpeg,png',
-            'documento' => 'mimes:doc,pdf,docx,xlsx',
-            'estado' => 'required',
+            'titulo'                => 'required',
+            'imagen'                => 'mimes:jpg,jpeg,png',
+            'documento'             => 'mimes:doc,pdf,docx,xlsx',
+            'estado'                => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         // Si el request tiene una imagen se elimina la actual para almacenar la nueva

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seccion;
 use App\Models\SubSeccion;
+use App\Rules\Recaptcha;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -73,18 +74,19 @@ class SeccionController extends Controller
         $seccionDatos = $request->all();
 
         $validated = $request->validate([
-            'titulo'            => 'nullable|string',
-            'descripcion'       => 'nullable|string|max:50',
-            'tipo'              => 'required',
-            'imagen'            => 'nullable|mimes:jpg,jpeg,png,webp',
-            'imagen_telefono'   => 'nullable|mimes:jpg,jpeg,png,webp',
-            // 'color'             => 'required',
-            'enlace'            => 'nullable',
-            'orden'             => 'required|integer|min:0',
-            'estado'            => 'required',
-            'mapa'              => 'nullable',
-            'identificador'     => 'string|nullable',
-            'banner_principal'  => 'nullable',
+            'titulo'                => 'nullable|string',
+            'descripcion'           => 'nullable|string|max:50',
+            'tipo'                  => 'required',
+            'imagen'                => 'nullable|mimes:jpg,jpeg,png,webp',
+            'imagen_telefono'       => 'nullable|mimes:jpg,jpeg,png,webp',
+            // 'color'                 => 'required',
+            'enlace'                => 'nullable',
+            'orden'                 => 'required|integer|min:0',
+            'estado'                => 'required',
+            'mapa'                  => 'nullable',
+            'identificador'         => 'required|string',
+            'banner_principal'      => 'nullable',
+            'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
 
         // Si el request eiene una imagen
@@ -165,17 +167,18 @@ class SeccionController extends Controller
 
         // Reglas de validación
         $validated = $request->validate([
-            'titulo'            => 'nullable|string',
-            'descripcion'       => 'nullable|string',
-            'tipo'              => 'required',
-            'imagen'            => 'nullable|mimes:jpg,jpeg,png,webp',
-            'imagen_telefono'   => 'nullable|mimes:jpg,jpeg,png,webp',
-            // 'color'             => 'required',
-            'enlace'            => 'nullable',
-            'orden'             => 'required|integer|min:0',
-            'estado'            => 'required',
-            'mapa'              => 'nullable',
-            'identificador'     => 'string|nullable',
+            'titulo'                => 'nullable|string',
+            'descripcion'           => 'nullable|string',
+            'tipo'                  => 'required',
+            'imagen'                => 'nullable|mimes:jpg,jpeg,png,webp',
+            'imagen_telefono'       => 'nullable|mimes:jpg,jpeg,png,webp',
+            // 'color'                 => 'required',
+            'enlace'                => 'nullable',
+            'orden'                 => 'required|integer|min:0',
+            'estado'                => 'required',
+            'mapa'                  => 'nullable',
+            'identificador'         => 'required|string',
+            'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
 
         // Si el request no tiene una imagen, la crea

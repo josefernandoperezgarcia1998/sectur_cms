@@ -15,6 +15,14 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
+@error('g-recaptcha-response')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>    
+            <span class="text-danger error-text">{{$message}}</span>                
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@enderror
 <h2 class="h5">Listado de roles</h2>
 {!! Form::model($user, ['route' => ['users.update', $user->id], 'autocomplete' => 'off', 'files' => true, 'method' => 'PUT']) !!}
 <div class="row">

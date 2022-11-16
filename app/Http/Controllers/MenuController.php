@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\Pagina;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
@@ -37,6 +38,15 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
+
+    
+        $validated = $request->validate([
+            'name'                  => 'required',
+            'order'                 => 'required',
+            'enabled'               => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha]
+        ]);
+
         // dd($request->all());
         // Si del request pagina_id no contiene nada se envía
         if(($request->pagina_id != '0') && (is_null($request->enlace))){
@@ -71,6 +81,12 @@ class MenuController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'name'                  => 'required',
+            'order'                 => 'required',
+            'enabled'               => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha]
+        ]);
         // $valoresMenu = $request->all();
         // $menu = Menu::find($id);
         // $menu->fill($valoresMenu);

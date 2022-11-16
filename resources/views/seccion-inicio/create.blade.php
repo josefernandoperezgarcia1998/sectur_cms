@@ -19,6 +19,15 @@
     <h4>Warning Callout</h4>
     This is a warning callout.
 </div> --}}
+@error('g-recaptcha-response')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>    
+            <span class="text-danger error-text">{{$message}}</span>                
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@enderror
+
 <div class="card shadow p-3 mb-5 bg-body rounded">
     <div class="card-header">
         <div class="d-flex justify-content-between">

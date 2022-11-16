@@ -38,6 +38,29 @@
         }
 
     </style>
+    {{-- Google Recaptcha inicia --}}
+    <script src="https://www.google.com/recaptcha/api.js?render=6LezrxAjAAAAACrsBq12qCMw1SRdmWYfS61a-d_s"></script>
+    <script>
+        document.addEventListener('submit', function(e){
+            e.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LezrxAjAAAAACrsBq12qCMw1SRdmWYfS61a-d_s', {action: 'submit'}).then(function(token) {
+
+                    let form = e.target;
+
+                    let input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'g-recaptcha-response';
+                    input.value = token;
+
+                    form.appendChild(input);
+
+                    form.submit();
+                });
+            });
+        })
+    </script>
+    {{-- Google recaptcha termina --}}
     @stack('css')
 </head>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SubSeccion;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
@@ -41,12 +42,13 @@ class SubSeccionController extends Controller
         $subSeccionDatos = $request->all();
 
         $validated = $request->validate([
-            'titulo'            => 'nullable|string',
-            'descripcion'       => 'nullable|string|max:50',
-            'imagen'            => 'nullable|mimes:jpg,jpeg,png,webp',
-            'imagen_telefono'   => 'nullable|mimes:jpg,jpeg,png,webp',
-            'enlace'            => 'nullable',
-            'estado'            => 'required',
+            'titulo'                => 'nullable|string',
+            'descripcion'           => 'nullable|string|max:50',
+            'imagen'                => 'nullable|mimes:jpg,jpeg,png,webp',
+            'imagen_telefono'       => 'nullable|mimes:jpg,jpeg,png,webp',
+            'enlace'                => 'nullable',
+            'estado'                => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         $subSeccionDatos['seccion_id'] = Session::get('seccion_id');
@@ -116,12 +118,13 @@ class SubSeccionController extends Controller
         $subSeccion = SubSeccion::find($id);
 
         $validated = $request->validate([
-            'titulo'            => 'nullable|string',
-            'descripcion'       => 'nullable|string|max:50',
-            'imagen'            => 'nullable|mimes:jpg,jpeg,png',
-            'imagen_telefono'   => 'nullable|mimes:jpg,jpeg,png',
-            'enlace'            => 'nullable',
-            'estado'            => 'required',
+            'titulo'                => 'nullable|string',
+            'descripcion'           => 'nullable|string|max:50',
+            'imagen'                => 'nullable|mimes:jpg,jpeg,png',
+            'imagen_telefono'       => 'nullable|mimes:jpg,jpeg,png',
+            'enlace'                => 'nullable',
+            'estado'                => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         $subSeccionDatos['seccion_id'] = Session::get('seccion_id');

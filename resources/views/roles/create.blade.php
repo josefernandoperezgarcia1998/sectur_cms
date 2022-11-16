@@ -10,6 +10,14 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
+@error('g-recaptcha-response')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>    
+            <span class="text-danger error-text">{{$message}}</span>                
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@enderror
 <div class="card shadow p-3 mb-5 bg-body rounded">
     <div class="container">
         {!! Form::open(['route' => 'roles.store', 'autocomplete' => 'off', 'files' => true]) !!}

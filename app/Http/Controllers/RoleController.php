@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pagina;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +57,8 @@ class RoleController extends Controller
         $valores = $request->all();
 
         $request->validate([
-            'name' => 'required',
+            'name'                  => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
         
         $rol = Role::create($valores);
@@ -119,7 +121,8 @@ class RoleController extends Controller
         $valores = $request->all();
 
         $request->validate([
-            'name' => 'required',
+            'name'                  => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         $role = Role::findOrFail($id);

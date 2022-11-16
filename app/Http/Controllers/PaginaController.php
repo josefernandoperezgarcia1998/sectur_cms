@@ -9,6 +9,7 @@ use App\Models\Archivo;
 use App\Models\Footer;
 use App\Models\Menu;
 use App\Models\User;
+use App\Rules\Recaptcha;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -46,9 +47,10 @@ class PaginaController extends Controller
         Aquí poner las validaciones correspondientes
         */
         $validated = $request->validate([
-            'titulo'        => 'required',
-            'tipo_pagina'   => 'required',
-            'estado'        => 'required',
+            'titulo'                => 'required',
+            'tipo_pagina'           => 'required',
+            'estado'                => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         // Si existe una imagen destacada en el request se almacena en el storage
@@ -91,6 +93,13 @@ class PaginaController extends Controller
     {
 
         $pagina_data = $request->all();
+
+        $validated = $request->validate([
+            'titulo'                => 'required',
+            'tipo_pagina'           => 'required',
+            'estado'                => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha],
+        ]);
 
         // La primer condición dice 
         //"Si al momento de actualizar el campo de imagen_destacada es NULL en la BD y si existe algo en el request de imagen_destacada

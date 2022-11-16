@@ -131,7 +131,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-2 col-md-6 g-mb-20 g-mb-0--lg d-none d-sm-none d-md-none d-lg-none d-xl-block">
+                        <div class="col-lg-1 col-md-6 g-mb-20 g-mb-0--lg d-none d-sm-none d-md-none d-lg-none d-xl-block">
                             <img class="img-fluid" src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="Logo">
                         </div>
                         <div class="col-lg-3 col-md-6 g-mb-20 g-mb-0--lg d-none d-sm-none d-md-none d-lg-none d-xl-block">
@@ -148,7 +148,7 @@
                             </ul>
                         </div>
 
-                        <div class="col-lg-2 col-md-6 g-mb-20 g-mb-0--lg d-none d-sm-none d-md-none d-lg-none d-xl-block">
+                        <div class="col-lg-3 col-md-6 g-mb-20 g-mb-0--lg d-none d-sm-none d-md-none d-lg-none d-xl-block">
                             <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8">
                                 <h2 class="u-heading-v2__title h6 mb-0">Contacto</h2>
                             </div>

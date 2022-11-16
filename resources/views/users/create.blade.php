@@ -15,6 +15,14 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
+@error('g-recaptcha-response')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>    
+            <span class="text-danger error-text">{{$message}}</span>                
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@enderror
 {!! Form::open(['route' => 'users.store', 'autocomplete' => 'off', 'files' => true]) !!}
 <div class="row">
     <div class="col">

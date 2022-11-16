@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 class AutenticarController extends Controller
 {
@@ -16,6 +18,13 @@ class AutenticarController extends Controller
 
     public function autenticar(Request $request)
     {
+
+        $request->validate(([
+            'email'                 => 'required|email',
+            'password'              => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha]
+        ]));
+
         $email   = $request->input('email');
         $usuario = User::where('email', $email)->first();
         

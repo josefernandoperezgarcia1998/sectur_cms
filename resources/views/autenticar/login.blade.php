@@ -86,6 +86,35 @@
 
     <!-- Custom styles for this template -->
     {{-- <link href="https://getbootstrap.com/docs/5.2/examples/sign-in/signin.css" rel="stylesheet"> --}}
+    
+    {{-- Google Recaptcha inicia --}}
+    <script src="https://www.google.com/recaptcha/api.js?render=6LezrxAjAAAAACrsBq12qCMw1SRdmWYfS61a-d_s"></script>
+    <script>
+        document.addEventListener('submit', function(e){
+            e.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LezrxAjAAAAACrsBq12qCMw1SRdmWYfS61a-d_s', {action: 'submit'}).then(function(token) {
+
+                    let form = e.target;
+
+                    let input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'g-recaptcha-response';
+                    input.value = token;
+
+                    form.appendChild(input);
+
+                    form.submit();
+                });
+            });
+        })
+    </script>
+    {{-- Google recaptcha termina --}}
+    <style>
+        .error-text{
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 
 <body class="text-center">
@@ -109,19 +138,30 @@
                 <img src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas" >
             </div>
             <div class="card-body">
-                <form action="{{ route('validar') }}" enctype="multipart/form-data" method="POST">
+                <form id="demo-form" action="{{ route('validar') }}" enctype="multipart/form-data" method="POST">
                     @csrf
-                    
                     <div class="form-floating">
                         <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email"
                             value="{{ old('email') }}">
                         <label for="floatingInput">Correo electrónico</label>
+                        @error('email')
+                            <span class="text-danger error-text">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="form-floating">
                         <input type="password" class="form-control" id="password" placeholder="Password"
                             name="password">
                         <label for="floatingPassword">Contraseña</label>
+                        @error('password')
+                            <span class="text-danger error-text">{{$message}}</span>
+                        @enderror
                     </div>
+                    @if (session('errors'))
+                    <hr>
+                        @error('g-recaptcha-response')
+                            <span class="text-danger error-text">{{$message}}</span>
+                        @enderror
+                    @endif
                     <br>
                     <button class="w-100 btn btn-sm btn-primary" type="submit">Entrar</button>
                 </form>
@@ -131,7 +171,6 @@
             </div>
         </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

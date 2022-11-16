@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pagina;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Rules\Recaptcha;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -48,13 +49,14 @@ class UserController extends Controller
 
          /* Reglas de validación del request */
         $validation = Validator::make($request->all(), [
-            'name'      => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email', 'max:255'],
-            'password'  => ['required', 'min:8'],
-            'password2' => ['required', 'min:8'],
-            'estado'    => ['required'],
-            'roles'     => ['required'],
-            'paginas'   => ['required'],
+            'name'                  => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'string', 'email', 'max:255'],
+            'password'              => ['required', 'min:8'],
+            'password2'             => ['required', 'min:8'],
+            'estado'                => ['required'],
+            'roles'                 => ['required'],
+            'paginas'               => ['required'],
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         /* Fallo en caso de que las reglas de validación fallen */
@@ -108,9 +110,10 @@ class UserController extends Controller
         $roles = $request->roles;
         
         $validation = Validator::make($request->all(), [
-            'name'      => ['required', 'string'],
-            'email'     => ['required', 'string'],
-            'estado'    => ['required'],
+            'name'                  => ['required', 'string'],
+            'email'                 => ['required', 'string'],
+            'estado'                => ['required'],
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         /* Fallo en caso de que las reglas de validación fallen */

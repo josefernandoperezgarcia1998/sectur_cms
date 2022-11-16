@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Footer;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
@@ -32,9 +33,10 @@ class FooterController extends Controller
         $valorContenido = $request->all();
 
         $validated = $request->validate([
-            'nombre' => 'required',
-            'tipo' => 'required',
-            'estado' => 'required',
+            'nombre'                => 'required',
+            'tipo'                  => 'required',
+            'estado'                => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
 
         Footer::create($valorContenido);
@@ -52,6 +54,13 @@ class FooterController extends Controller
     public function update(Request $request, $id)
     {
         $valoresMenu = $request->all();
+
+        $validated = $request->validate([
+            'nombre'                => 'required',
+            'tipo'                  => 'required',
+            'estado'                => 'required',
+            'g-recaptcha-response'  => ['required', new Recaptcha]
+        ]);
 
         $footer = Footer::find($id);
         $footer->fill($valoresMenu);
