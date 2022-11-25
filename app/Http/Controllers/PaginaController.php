@@ -62,7 +62,9 @@ class PaginaController extends Controller
             $datosPagina['imagen_destacada'] = $request->file('imagen_destacada')->storeAs('uploads/paginas/imagenes_destacadas', $imageName, 'public');
         }
 
-
+        // Asignando el rol a la columna fuente de la Página.
+        $datosPagina['fuente'] = auth()->user()->roles->pluck("name")->first();
+        
         // Se crea la página con los valores del request
         $pagina = Pagina::create($datosPagina);
 
@@ -167,6 +169,9 @@ class PaginaController extends Controller
         }
 
         // Fin para cuando se actualice el nombre de una pagina , también se actualice en el menu
+
+        // Asignando el rol a la columna fuente de la Página.
+        $pagina_data['fuente'] = auth()->user()->roles->pluck("name")->first();
 
         // Se actualiza los datos de la página
         $pagina->update($pagina_data);

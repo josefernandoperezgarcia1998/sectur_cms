@@ -125,7 +125,7 @@
     <table class="table">
         <tr>
             <th class="table-active">Fuente</th>
-            <td>Unidad de Apoyo Administrativo / Área de Recursos Humanos</td>
+            <td>{{$page->fuente}}</td>
         </tr>
         <tr>
             <th class="table-active">Actualización</th>

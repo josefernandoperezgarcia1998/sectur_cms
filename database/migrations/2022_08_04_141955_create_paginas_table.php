@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('tipo_pagina', ['pagina','blog','galeria'])->default('pagina');
             $table->enum('estado', ['Si','No'])->default('Si');
             $table->enum('imagen_principal_estado', ['Si','No'])->default('Si');
+            $table->string('fuente')->nullable();
             $table->timestamps();
         });
     }

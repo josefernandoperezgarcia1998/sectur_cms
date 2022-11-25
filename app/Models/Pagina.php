@@ -19,6 +19,7 @@ class Pagina extends Model
         'tipo_pagina',
         'estado',
         'imagen_principal_estado',
+        'fuente',
     ];
 
     public function getRouteKeyName(){

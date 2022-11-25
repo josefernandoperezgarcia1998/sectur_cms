@@ -177,7 +177,9 @@
             @enderror
         </div>
         {!! Form::submit('Actualizar', ['class' => 'btn btn-primary btn-sm']) !!}
-        <a href="{{route('paginas.index')}}" class="btn btn-secondary btn-sm">Volver</a>
+        @role('Admin')
+            <a href="{{route('paginas.index')}}" class="btn btn-secondary btn-sm">Volver</a>
+        @endrole
         {!! Form::close() !!}
     </div>
 </div>

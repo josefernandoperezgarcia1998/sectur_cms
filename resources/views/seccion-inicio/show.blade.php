@@ -51,17 +51,17 @@
         <table class="table table-responsive">
             <tbody>
                 <tr class="">
-                    <th class="table-light" colspan="1"><span>Título de la sección</span></th>
-                    <th class="table-light" colspan="1"><span>Color</span></th>
+                    <th class="table-light" colspan="1"><span>Identificador de la sección</span></th>
+                    {{-- <th class="table-light" colspan="1"><span>Color</span></th> --}}
                     <th class="table-light" colspan="1"><span></span></th>
                     <th class="table-light" colspan="1"><span>Imagen</span></th>
                     <th class="table-light" colspan="1"><span>Fecha de Creación</span></th>
                 </tr>
                 <tr class="">
-                    <td colspan="1">{{$seccion->titulo}}</td>
-                    <td colspan="1">
+                    <td colspan="1">{{$seccion->identificador}}</td>
+                    {{-- <td colspan="1">
                         <div style="background-color: {{$seccion->color}}">&nbsp;</div>
-                    </td>
+                    </td> --}}
                     <td colspan="1"></td>
                     <td colspan="1">
                         @if (is_null($seccion->imagen))

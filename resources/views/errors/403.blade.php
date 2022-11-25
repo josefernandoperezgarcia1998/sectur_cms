@@ -98,7 +98,67 @@
         }
 
     </style>
-     <link rel="stylesheet" href="{{asset('assets/css/estilos.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/estilos.css')}}">
+
+    {{-- Inicia links de chiapas.gob.mx --}}
+
+                    <!-- Google Fonts -->
+                    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
+
+                    <!-- CSS Global Compulsory -->
+                    
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/bootstrap/bootstrap.min.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/bootstrap/offcanvas.css')}}"> --}}
+
+                    <!-- CSS Implementing Plugins -->
+                    <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/icon-awesome/css/font-awesome.min.css')}}">
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/icon-line-pro/style.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/icon-line/css/simple-line-icons.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/icon-hs/style.css')}}"> --}}
+                    <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/dzsparallaxer.css')}}">
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/dzsscroller/scroller.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/advancedscroller/plugin.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/animate.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets//vendor/typedjs/typed.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/hamburgers/hamburgers.min.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/fancybox/jquery.fancybox.css')}}"> --}}
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/vendor/slick-carousel/slick/slick.css')}}"> --}}
+
+                    <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/css/unify-core.css')}}">
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/css/unify-components.css')}}"> --}}
+                    <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/css/unify-globals.css')}}">
+
+                    {{-- <link rel="stylesheet" href="{{asset('assets/plantilla-chiapas-gob/assets/css/custom.css')}}"> --}}
+
+                    {{-- Estilos para el banner institucional --}}
+                    <style>
+                        .probando-banner-institucional-normal{
+                            height: 100%; 
+                            /* background-image: url({{url('assets/plantilla-chiapas-gob/assets/img-temporal/1920x1080/banner-general-turismo.webp')}}); */
+                        }
+                        .probando-banner-institucional-movil{
+                            display: none;
+                        }
+
+                        @media only screen and (max-width: 770px) {
+                            .probando-banner-institucional-normal{
+                                display: none;
+                            }
+                            
+                            .probando-banner-institucional-movil{
+                                display: block;
+                                height: 100%; 
+                                /* background-image: url({{url('assets/plantilla-chiapas-gob/assets/img-temporal/1920x1080/banner-general-turismo-movil.webp')}}); */
+                            }
+                        }
+                    </style>
+
+                    <style>
+                        html{
+                            overflow-x: hidden;
+                        }
+                    </style>
+    {{-- Termina links de chiapas.gob.mx --}}
 </head>
 
 <body>
@@ -211,6 +271,64 @@
         new bootnavbar();
 
     </script>
+
+    {{-- Scripts chiapas.gob.mx --}}
+
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/jquery/jquery.min.js')}}"></script>
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/jquery-migrate/jquery-migrate.min.js')}}"></script> --}}
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/popper.js/popper.min.js')}}"></script> --}}
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/bootstrap/bootstrap.min.js')}}"></script> --}}
+
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/hs-megamenu/src/hs.megamenu.js')}}"></script> --}}
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/dzsparallaxer.js')}}"></script>
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/dzsscroller/scroller.js')}}"></script> --}}
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/dzsparallaxer/advancedscroller/plugin.js')}}"></script> --}}
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/fancybox/jquery.fancybox.min.js')}}"></script> --}}
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/slick-carousel/slick/slick.js')}}"></script> --}}
+
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/js/hs.core.js')}}"></script>
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/vendor/typedjs/typed.min.js')}}"></script>
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/js/components/hs.header.js')}}"></script>
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/js/helpers/hs.hamburgers.js')}}"></script>
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/js/components/hs.dropdown.js')}}"></script>
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/js/components/hs.popup.js')}}"></script>
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/js/components/hs.carousel.js')}}"></script>
+        <script src="{{asset('assets/plantilla-chiapas-gob/assets/js/components/hs.go-to.js')}}"></script> --}}
+
+        {{-- <script src="{{asset('assets/plantilla-chiapas-gob/assets/js/custom.js')}}"></script> --}}
+
+        <script>
+            $(document).on('ready', function () {
+
+                $.HSCore.components.HSHeader.init($('#js-header'));
+                $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+                $('.js-mega-menu').HSMegaMenu({
+                    event: 'hover',
+                    pageContainer: $('.container'),
+                    breakpoint: 991
+                });
+
+                $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
+                    afterOpen: function () {
+                        $(this).find('input[type="search"]').focus();
+                    }
+                });
+
+                $.HSCore.components.HSPopup.init('.js-fancybox');
+
+                $.HSCore.components.HSCarousel.init('.js-carousel');
+
+                $.HSCore.components.HSGoTo.init('.js-go-to');
+            });
+        </script>
+
+        <script>
+            //    Ocultar un scroll extra
+            // $('html').css('overflow', 'hidden');
+        </script>
+
+    {{-- Scripts chiapas.gob.mx --}}
 </body>
 
 </html>

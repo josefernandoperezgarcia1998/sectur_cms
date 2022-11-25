@@ -103,7 +103,7 @@
                                 <label for="rol" class="form-label">Tipo</label>
                                 <select class="form-select" id="selectMenu" name="parent">
                                     <option value="0">Seleccionar menú</option>
-                                    @foreach ($menus as $menu)
+                                    {{-- @foreach ($menus as $menu)
                                     @if ($menu->parent == 0)
                                     <option value="{{$menu->id}}" {{ old('parent') == $menu->id ? 'selected' : '' }}>
                                         {{$menu->name}}</option>
@@ -111,6 +111,12 @@
                                     <option value="{{$menu->id}}" {{ old('parent') == $menu->id ? 'selected' : '' }}>
                                         &nbsp;&nbsp;&nbsp;&nbsp;{{$menu->name}}</option>
                                     @endif
+                                    @endforeach --}}
+                                    @foreach ($menus as $key => $item)
+                                        @if ($item['parent'] != 0)
+                                            @break
+                                        @endif
+                                        @include('shared.menus.create', ['item' => $item])
                                     @endforeach
                                 </select>
                                 

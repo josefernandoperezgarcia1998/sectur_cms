@@ -104,14 +104,18 @@
                                 <label for="rol" class="form-label">Tipo</label>
                                 <select class="form-select" id="selectMenu" name="parent">
                                     <option value="0">Seleccionar menú</option>
-                                    @foreach ($menus as $menu)
+                                    {{-- @foreach ($menus as $menu)
                                     @if ($menu->parent == 0)
-                                    {{-- <option value="{{$menu->id}}" {{ old('parent') == $menu->id ? 'selected' : '' }}>{{$menu->name}}</option> --}}
                                     <option value="{{ $menu->id }}" @if ($menuData->parent === $menu->id || old('parent') === $menu->id) selected @endif>{{ $menu->name }}</option>
                                     @else
-                                    {{-- <option value="{{$menu->id}}" {{ old('parent') == $menu->id ? 'selected' : '' }}> &nbsp;&nbsp;&nbsp;&nbsp;{{$menu->name}}</option> --}}
                                     <option value="{{ $menu->id }}" @if ($menuData->parent === $menu->id || old('parent') === $menu->id) selected @endif>&nbsp;&nbsp;&nbsp;&nbsp;{{ $menu->name }}</option>
                                     @endif
+                                    @endforeach --}}
+                                    @foreach ($menus as $key => $item)
+                                        @if ($item['parent'] != 0)
+                                            @break
+                                        @endif
+                                        @include('shared.menus.edit', ['item' => $item])
                                     @endforeach
                                 </select>
                             </div>
@@ -121,10 +125,10 @@
                                 <label for="estado" class="form-label">Target</label>
                                 <select class="form-select" name="target">
                                     <option value="" selected>Seleccionar estado</option>
-                                    <option {{ old('target') == '_blank' ? 'selected' : ($menu->target == '_blank' ? 'selected' : '') }} value="_blank">_blank</option>
-                                    <option {{ old('target') == '_parent' ? 'selected' : ($menu->target == '_parent' ? 'selected' : '') }} value="_parent">_parent</option>
-                                    <option {{ old('target') == '_self' ? 'selected' : ($menu->target == '_self' ? 'selected' : '') }} value="_self">_self</option>
-                                    <option {{ old('target') == '_top' ? 'selected' : ($menu->target == '_top' ? 'selected' : '') }} value="_top">_top</option>
+                                    <option {{ old('target') == '_blank' ? 'selected' : ($menuData->target == '_blank' ? 'selected' : '') }} value="_blank">_blank</option>
+                                    <option {{ old('target') == '_parent' ? 'selected' : ($menuData->target == '_parent' ? 'selected' : '') }} value="_parent">_parent</option>
+                                    <option {{ old('target') == '_self' ? 'selected' : ($menuData->target == '_self' ? 'selected' : '') }} value="_self">_self</option>
+                                    <option {{ old('target') == '_top' ? 'selected' : ($menuData->target == '_top' ? 'selected' : '') }} value="_top">_top</option>
                                 </select>
                             </div>
                         </div>
@@ -139,8 +143,8 @@
                                 <label for="estado" class="form-label">Activo</label>
                                 <select class="form-select" name="enabled">
                                     <option value="" selected>Seleccionar estado</option>
-                                    <option {{ old('enabled') == '1' ? 'selected' : ($menu->enabled == '1' ? 'selected' : '') }} value="1">Si</option>
-                                    <option {{ old('enabled') == '0' ? 'selected' : ($menu->enabled == '0' ? 'selected' : '') }} value="0">No</option>
+                                    <option {{ old('enabled') == '1' ? 'selected' : ($menuData->enabled == '1' ? 'selected' : '') }} value="1">Si</option>
+                                    <option {{ old('enabled') == '0' ? 'selected' : ($menuData->enabled == '0' ? 'selected' : '') }} value="0">No</option>
                                 </select>
                                 @error('enabled')
                                         <span class="text-danger">{{$message}}</span>
@@ -150,7 +154,7 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Orden</label>
-                                <input type="number" class="form-control w-50" id="order" name="order" value="{{ old('order', $menu->order) }}"
+                                <input type="number" class="form-control w-50" id="order" name="order" value="{{ old('order', $menuData->order) }}"
                                     autocomplete="off">
                                     @error('order')
                                         <span class="text-danger">{{$message}}</span>

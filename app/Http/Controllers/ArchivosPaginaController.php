@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pagina;
 use App\Models\Archivo;
+use App\Models\Repositorio;
 use App\Rules\Recaptcha;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -84,6 +85,16 @@ class ArchivosPaginaController extends Controller
             $archivoData['type_imagen'] = $imagenExtension;
 
             $archivoData['imagen']= $request->file('imagen')->storeAs('uploads/paginas/archivos/imagenes', $nombre_de_imagen, 'public');
+
+            // Inicia el proceso para agregar al Modelo de Repositorio
+            
+            $repositorio          = new Repositorio;
+            $repositorio->titulo  = $nombre_de_imagen;
+            $repositorio->tipo    = $imagenExtension;
+            $repositorio->archivo = $request->file('imagen')->storeAs('uploads/repositorio/archivos', $nombre_de_imagen, 'public');
+            $repositorio->save();
+
+            // Inicia el proceso para agregar al Modelo de Repositorio
         }
 
         if($request->hasFile('documento')){
@@ -107,6 +118,16 @@ class ArchivosPaginaController extends Controller
             $archivoData['type_documento'] = $documentExtension;
 
             $archivoData['documento']= $request->file('documento')->storeAs('uploads/paginas/archivos/documentos', $nombre_de_documento, 'public');
+
+            // Inicia el proceso para agregar al Modelo de Repositorio
+            
+            $repositorio          = new Repositorio;
+            $repositorio->titulo  = $nombre_de_documento;
+            $repositorio->tipo    = $documentExtension;
+            $repositorio->archivo = $request->file('documento')->storeAs('uploads/repositorio/archivos', $nombre_de_documento, 'public');
+            $repositorio->save();
+
+            // Inicia el proceso para agregar al Modelo de Repositorio
         }
 
         if($request->hasFile('imagen') && $request->hasFile('documento')){
@@ -155,6 +176,16 @@ class ArchivosPaginaController extends Controller
         }
 
         Archivo::create($archivoData);
+
+        // Actualizando la página al momento que se cargue un archivo
+        DB::table('paginas')
+            ->where('id', $pagina->id)
+            ->update([
+                'fuente'      => auth()->user()->roles->pluck("name")->first(),
+                'updated_at'  => now(),
+            ]);
+        // Actualizando la página al momento que se cargue un archivo
+
 
         return redirect()->route('paginas.archivos',$pagina)->with('success', 'Registro creado correctamente');
     }
@@ -229,6 +260,16 @@ class ArchivosPaginaController extends Controller
                 $archivoData['type_imagen'] = $imagenExtension;
 
                 $archivoData['imagen']= $request->file('imagen')->storeAs('uploads/paginas/archivos/imagenes', $nombre_de_imagen, 'public');
+
+                // Inicia el proceso para agregar al Modelo de Repositorio
+            
+                $repositorio          = new Repositorio;
+                $repositorio->titulo  = $nombre_de_imagen;
+                $repositorio->tipo    = $imagenExtension;
+                $repositorio->archivo = $request->file('imagen')->storeAs('uploads/repositorio/archivos', $nombre_de_imagen, 'public');
+                $repositorio->save();
+
+                // Inicia el proceso para agregar al Modelo de Repositorio
                 
             } elseif (Storage::exists($archivo->imagen)){
 
@@ -256,6 +297,16 @@ class ArchivosPaginaController extends Controller
                 $archivoData['type_imagen'] = $imagenExtension;
 
                 $archivoData['imagen']= $request->file('imagen')->storeAs('uploads/paginas/archivos/imagenes', $nombre_de_imagen, 'public');
+
+                // Inicia el proceso para agregar al Modelo de Repositorio
+            
+                $repositorio          = new Repositorio;
+                $repositorio->titulo  = $nombre_de_imagen;
+                $repositorio->tipo    = $imagenExtension;
+                $repositorio->archivo = $request->file('imagen')->storeAs('uploads/repositorio/archivos', $nombre_de_imagen, 'public');
+                $repositorio->save();
+
+                // Inicia el proceso para agregar al Modelo de Repositorio
 
             }
         }
@@ -286,6 +337,16 @@ class ArchivosPaginaController extends Controller
 
                 $archivoData['documento']= $request->file('documento')->storeAs('uploads/paginas/archivos/documentos', $nombre_de_documento, 'public');
 
+                // Inicia el proceso para agregar al Modelo de Repositorio
+            
+                $repositorio          = new Repositorio;
+                $repositorio->titulo  = $nombre_de_documento;
+                $repositorio->tipo    = $documentExtension;
+                $repositorio->archivo = $request->file('documento')->storeAs('uploads/repositorio/archivos', $nombre_de_documento, 'public');
+                $repositorio->save();
+
+                // Inicia el proceso para agregar al Modelo de Repositorio
+
             } elseif (Storage::exists($archivo->documento)){
                 // borrando la documento del storage
                 $archivoDocumento = Archivo::findOrFail($id);
@@ -311,6 +372,16 @@ class ArchivosPaginaController extends Controller
                 $archivoData['type_documento'] = $documentExtension;
 
                 $archivoData['documento']= $request->file('documento')->storeAs('uploads/paginas/archivos/documentos', $nombre_de_documento, 'public');
+
+                // Inicia el proceso para agregar al Modelo de Repositorio
+            
+                $repositorio          = new Repositorio;
+                $repositorio->titulo  = $nombre_de_documento;
+                $repositorio->tipo    = $documentExtension;
+                $repositorio->archivo = $request->file('documento')->storeAs('uploads/repositorio/archivos', $nombre_de_documento, 'public');
+                $repositorio->save();
+
+                // Inicia el proceso para agregar al Modelo de Repositorio
 
             }
 
@@ -368,6 +439,15 @@ class ArchivosPaginaController extends Controller
         // }
 
         $archivo->update($archivoData);
+
+        // Actualizando la página al momento que se cargue un archivo
+        DB::table('paginas')
+            ->where('id', $pagina->id)
+            ->update([
+                'fuente'      => auth()->user()->roles->pluck("name")->first(),
+                'updated_at'  => now(),
+            ]);
+        // Actualizando la página al momento que se cargue un archivo
         
         return redirect()->route('paginas.archivos', $pagina)->with('success', 'Registro actualizado correctamente');
     }

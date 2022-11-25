@@ -31,7 +31,9 @@ class MenuController extends Controller
         // $arreglo2 = Pagina::all()->toArray();
         // $arreglos = array_merge($arreglo1, $arreglo2);
         // dd($arreglos);
-        $menus = Menu::all();
+
+        $menus = Menu::menus();
+        // $menus = Menu::all();
         $paginas = DB::table('paginas')->orderBy('titulo','asc')->get();
         return view('menu.create', compact('menus','paginas'));
     }
@@ -72,7 +74,8 @@ class MenuController extends Controller
 
     public function edit($id)
     {
-        $menus = Menu::all();
+        $menus = Menu::menus();
+        // $menus = Menu::all();
         $paginas = DB::table('paginas')->orderBy('titulo','asc')->get();
         $menuData = Menu::findOrFail($id);
         

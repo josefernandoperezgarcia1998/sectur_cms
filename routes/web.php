@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SeccionController;
 use App\Http\Controllers\SubSeccionController;
+use App\Http\Controllers\RepositorioController;
 use Spatie\Activitylog\Models\Activity;
 
 // Route::get('/', function () {
@@ -96,6 +97,12 @@ Route::get('prueba', function() {
    // return Activity::all();
    return Activity::orderBy('id','desc')->get();
    });
+
+// Ruta resource para el repositorio de archivos
+Route::resource('repositorio', RepositorioController::class)->names('repositorios');
+
+// Ruta con ajax para obtener toda la data de paginas con datatables
+Route::get('repositorios-data', [RepositorioController::class, 'repositoriosDatatables'])->name('repositorios-data');
 
 // Ruta con ajax para obtener toda la data de paginas con datatables
 Route::get('paginas-data', [PaginaController::class, 'paginasDatatables'])->name('paginas-data');
