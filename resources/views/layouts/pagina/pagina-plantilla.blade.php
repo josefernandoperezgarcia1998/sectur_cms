@@ -151,7 +151,7 @@
         </header>
         <br><br>
     {{-- test 2 --}}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_navbar">
+    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{route('inicio')}}"><img
                     src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas"></a>
@@ -171,7 +171,98 @@
                 </ul>
             </div>
         </div>
+    </nav> --}}
+    {{-- test 2 --}}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_navbar">
+        <div class="container-fluid caja">
+            <a class="navbar-brand caja1" href="{{route('inicio')}}" style="color:#621733; font-weight: 600;">{{-- <img
+                src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas"> --}}Secretaría de Turismo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse caja2" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @foreach ($menus as $key => $item)
+                        @if ($item['parent'] != 0)
+                            @break
+                        @endif
+                        @include('shared.navbar', ['item' => $item])
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </nav>
+
+    {{-- Estilos para el menu de navegación nuevo acorde a la supervisión de chiapas.gob.mx --}}
+    <style>
+        /* @media screen and (min-width:1350px) and (max-width:1500px) { */
+            .caja{
+                /* position: relative; */
+            }
+            
+            .caja1{
+                position: relative;
+                left: 250px; 
+            }
+            
+            .caja2{
+                position: relative;
+                left: 600px; 
+            }
+        /* } */
+
+        @media screen and (min-width:1300px) and (max-width:1500px) {
+
+            .caja1{
+                left: 150px; 
+            }
+
+            .caja2{
+                left:400px;
+            }
+            
+        }
+        @media screen and (min-width:1200px) and (max-width:1300px) {
+            .caja1{
+                left: 100px; 
+            }
+
+            .caja2{
+                left: 350px;
+            }
+        }
+        
+        @media screen and (min-width:1100px) and (max-width:1200px) {
+            .caja1{
+                left: 130px; 
+            }
+
+            .caja2{
+                left: 300px;
+            }
+        }
+        @media screen and (min-width:1000px) and (max-width:1100px) {
+            .caja1{
+                left: 100px; 
+            }
+
+            .caja2{
+                left: 200px;
+            }
+        }
+        @media screen and (min-width:200px) and (max-width:999px) {
+            .caja1{
+                left: 0; 
+            }
+
+            .caja2{
+                left: 0;
+            }
+        }
+
+    </style>
 
     <div class="contedor-general">
         <div class="container mt-5 shadow p-3 mb-5 bg-body rounded cuerpo">

@@ -198,42 +198,197 @@
                         overflow-x: hidden;
                     }
                 </style>
+
+                <style>
+                    
+                    .caja-boton-chiapas-mobile{
+                        display: none;
+                    }
+                    
+                    .boton-mobile-chiapas {
+                        display: none;
+                        color: white;
+                    }
+
+                    .contenido-mobile-chiapas{
+                        display: none;
+                    }
+
+                    .boton-mobile-chiapas:active, .boton-mobile-chiapas:visited, .boton-mobile-chiapas:link{
+                        color: white;
+                    }
+
+                    .boton-mobile-chiapas:hover{
+                        color: rgb(148, 146, 146);
+                    }
+
+                    .links-mobile-chiapas > li {
+                        text-decoration: none;
+                        list-style: none;
+                    }
+
+                    #ocultar{
+                        display: none;
+                    }
+
+                    @media screen and (min-width:770px) and (max-width:990px) {
+                        
+
+                        .separador{
+                            display: none;
+                        }
+                        .caja-contenido-desktop{
+                            display: none;
+                        }
+
+                        .caja-boton-chiapas-mobile{
+                            display: block;
+                            position: relative;
+                            left: 500px;
+                        }
+
+                        .boton-mobile-chiapas {
+                            display: block;
+                        }
+
+                    }
+
+                    @media screen and (min-width:500px) and (max-width:770px) {
+
+                        .boton-mobile-chiapas {
+                            display: block;
+                        }
+
+                        .caja-boton-chiapas-mobile{
+                            display: block;
+                            position: relative;
+                            left: 300px;
+                        }
+                    }
+
+                    @media screen and (min-width:400px) and (max-width:500px) {
+                        .boton-mobile-chiapas {
+                            display: block;
+                        }
+
+                        .caja-boton-chiapas-mobile{
+                            display: block;
+                            position: relative;
+                            left: 200px;
+                        }
+                    }
+                    
+                    @media screen and (min-width:300px) and (max-width:400px) {
+                        .boton-mobile-chiapas {
+                            display: block;
+                        }
+
+                        .caja-boton-chiapas-mobile{
+                            display: block;
+                            position: relative;
+                            left: 170px;
+                        }
+                    }
+
+                    @media screen and (min-width:200px) and (max-width:300px) {
+                        .boton-mobile-chiapas {
+                            display: block;
+                        }
+
+                        .caja-boton-chiapas-mobile{
+                            display: block;
+                            position: relative;
+                            left: 50px;
+                        }
+                    }
+                </style>
 {{-- Termina links de chiapas.gob.mx --}}
 </head>
 
 <body>
     {{-- test 1 chiapas.gob.mx navbar --}}
-        <header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section fixed-top" data-header-fix-moment="300">	
-            <div class="u-header__section u-header__section--light  g-transition-0_3 d-flex justify-content-center" data-header-fix-moment-exclude="" data-header-fix-moment-classes="u-shadow-v18 g-py-0" style="background-color: #333">
-                <nav class="navbar navbar-expand-lg g-pa-0 g-pt-4 g-pb-4">
-                    <div class="container">
-                        <div class="d-flex align-items-center">
-                            <div class="">
-                                <a href="https://www.chiapas.gob.mx/" class="navbar-brand g-text-underline--hover"><img src="{{asset('assets/plantilla-chiapas-gob/assets/logo/escudo-icono.png')}}" alt="logo-chiapas"></a>
-                                <a href="https://www.chiapas.gob.mx/" class="g-color-white-opacity-0_9 g-font-size-16 g-font-weight-300 g-font-secondary g-text-underline--hover" style="color: rgba(255, 255, 255, 0.9) !important; text-decoration: none;">chiapas<span class="g-color-white-opacity-0_6" style="color: rgba(255, 255, 255, 0.6) !important">.gob.mx</span></a>
-                            </div>
-                            <div class="separador">
+            {{-- esto si funciona, lo estoy comentando para hacer pruebas --}}
+                {{-- <header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section fixed-top" data-header-fix-moment="300">	
+                    <div class="u-header__section u-header__section--light  g-transition-0_3 d-flex justify-content-center" data-header-fix-moment-exclude="" data-header-fix-moment-classes="u-shadow-v18 g-py-0" style="background-color: #333">
+                        <nav class="navbar navbar-expand-lg g-pa-0 g-pt-4 g-pb-4">
+                            <div class="container">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <a href="https://www.chiapas.gob.mx/" class="navbar-brand g-text-underline--hover"><img src="{{asset('assets/plantilla-chiapas-gob/assets/logo/escudo-icono.png')}}" alt="logo-chiapas"></a>
+                                        <a href="https://www.chiapas.gob.mx/" class="g-color-white-opacity-0_9 g-font-size-16 g-font-weight-300 g-font-secondary g-text-underline--hover" style="color: rgba(255, 255, 255, 0.9) !important; text-decoration: none;">chiapas<span class="g-color-white-opacity-0_6" style="color: rgba(255, 255, 255, 0.6) !important">.gob.mx</span></a>
+                                    </div>
+                                    <div class="separador">
 
-                            </div>
-                            <div class="">
-                                <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
-                                    <ul class="navbar-nav ml-auto g-font-size-16 g-font-weight-100">
-                                        <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/tramites" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Trámites</a></li>
-                                        <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/gobierno" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Gobierno</a></li>
-                                        <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/participa" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Participa</a></li>
-                                        <li class="nav-item g-mx-10--lg lis"><a href="http://gubernatura.transparencia.chiapas.gob.mx/" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Transparencia</a></li>
-                                        <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/busquedas" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                        </svg></a></li>
-                                    </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
+                                            <ul class="navbar-nav ml-auto g-font-size-16 g-font-weight-100">
+                                                <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/tramites" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Trámites</a></li>
+                                                <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/gobierno" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Gobierno</a></li>
+                                                <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/participa" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Participa</a></li>
+                                                <li class="nav-item g-mx-10--lg lis"><a href="http://gubernatura.transparencia.chiapas.gob.mx/" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Transparencia</a></li>
+                                                <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/busquedas" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                                </svg></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </nav>
                     </div>
-                </nav>
-            </div>
-        </header>
-        {{-- <br> --}}
+                </header> --}}
+                <header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section fixed-top" data-header-fix-moment="300">	
+                    <div class="u-header__section u-header__section--light  g-transition-0_3 " data-header-fix-moment-exclude="" data-header-fix-moment-classes="u-shadow-v18 g-py-0" style="background-color: #333">
+                        <nav class="navbar navbar-expand-lg g-pa-0 g-pt-4 g-pb-4">
+                            <div class="container">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <a href="https://www.chiapas.gob.mx/" class="navbar-brand g-text-underline--hover"><img src="{{asset('assets/plantilla-chiapas-gob/assets/logo/escudo-icono.png')}}" alt="logo-chiapas"></a>
+                                        <a href="https://www.chiapas.gob.mx/" class="g-color-white-opacity-0_9 g-font-size-16 g-font-weight-300 g-font-secondary g-text-underline--hover" style="color: rgba(255, 255, 255, 0.9) !important; text-decoration: none;">chiapas<span class="g-color-white-opacity-0_6" style="color: rgba(255, 255, 255, 0.6) !important">.gob.mx</span></a>
+                                    </div>
+                                    <div class="separador">
+
+                                    </div>
+                                    <div class="caja-contenido-desktop">
+                                        <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
+                                            <ul class="navbar-nav ml-auto g-font-size-16 g-font-weight-100">
+                                                <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/tramites" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Trámites</a></li>
+                                                <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/gobierno" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Gobierno</a></li>
+                                                <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/participa" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Participa</a></li>
+                                                <li class="nav-item g-mx-10--lg lis"><a href="http://gubernatura.transparencia.chiapas.gob.mx/" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Transparencia</a></li>
+                                                <li class="nav-item g-mx-10--lg lis"><a href="https://www.chiapas.gob.mx/busquedas" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                                </svg></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="caja-boton-chiapas-mobile">
+                                        <a href="javascript:void(0);" class="boton-mobile-chiapas">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contenido-mobile-chiapas">
+                                <ul class="links-mobile-chiapas">
+                                    <li class="links-chiapas-gob-mx"><a href="https://www.chiapas.gob.mx/tramites" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Trámites</a></li>
+                                    <li class="links-chiapas-gob-mx"><a href="https://www.chiapas.gob.mx/gobierno" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Gobierno</a></li>
+                                    <li class="links-chiapas-gob-mx"><a href="https://www.chiapas.gob.mx/participa" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Participa</a></li>
+                                    <li class="links-chiapas-gob-mx"><a href="http://gubernatura.transparencia.chiapas.gob.mx/" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">Transparencia</a></li>
+                                    <li class="links-chiapas-gob-mx"><a href="https://www.chiapas.gob.mx/busquedas" class="nav-link g-color-white-opacity-0_9 g-text-underline--hover ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </header>
+            {{-- esto si funciona, lo estoy comentando para hacer pruebas --}}
         
             <!-- Banner institucion -->
             {{-- <section class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll dzsprx-readyall"
@@ -320,15 +475,15 @@
             <!-- Banner Institucion -->
     {{-- test 2 --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main_navbar">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{route('inicio')}}"><img
-                src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas"></a>
+        <div class="container-fluid caja">
+            <a class="navbar-brand caja1" href="{{route('inicio')}}" style="color:#621733; font-weight: 600;">{{-- <img
+                src="{{asset('assets/imgs/sectur/logo_sectur.png')}}" alt="logo-sectur-chiapas"> --}}Secretaría de Turismo</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse caja2" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @foreach ($menus as $key => $item)
                         @if ($item['parent'] != 0)
@@ -340,6 +495,75 @@
             </div>
         </div>
     </nav>
+
+    {{-- Estilos para el menu de navegación nuevo acorde a la supervisión de chiapas.gob.mx --}}
+    <style>
+        /* @media screen and (min-width:1350px) and (max-width:1500px) { */
+            .caja{
+                /* position: relative; */
+            }
+            
+            .caja1{
+                position: relative;
+                left: 250px; 
+            }
+            
+            .caja2{
+                position: relative;
+                left: 600px; 
+            }
+        /* } */
+
+        @media screen and (min-width:1300px) and (max-width:1500px) {
+
+            .caja1{
+                left: 150px; 
+            }
+
+            .caja2{
+                left:400px;
+            }
+            
+        }
+        @media screen and (min-width:1200px) and (max-width:1300px) {
+            .caja1{
+                left: 100px; 
+            }
+
+            .caja2{
+                left: 350px;
+            }
+        }
+        
+        @media screen and (min-width:1100px) and (max-width:1200px) {
+            .caja1{
+                left: 130px; 
+            }
+
+            .caja2{
+                left: 300px;
+            }
+        }
+        @media screen and (min-width:1000px) and (max-width:1100px) {
+            .caja1{
+                left: 100px; 
+            }
+
+            .caja2{
+                left: 200px;
+            }
+        }
+        @media screen and (min-width:200px) and (max-width:999px) {
+            .caja1{
+                left: 0; 
+            }
+
+            .caja2{
+                left: 0;
+            }
+        }
+
+    </style>
 
     <main class="contenedor-general">
         <div class="container mt-5">
@@ -642,8 +866,8 @@
     </main>
 
         
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('assets/assets-bootstrap/bootstrap@5.1.3/bootstrap.bundle.min.js')}}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> --}}
     <script>
         function bootnavbar(options) {
             const defaultOption = {
@@ -762,7 +986,31 @@
             // $('html').css('overflow', 'hidden');
         </script>
 
+        {{-- Este script es para ver/ocultar el menu mobile de chiapas.gob.mx --}}
+        <script>
+            $(document).ready(function(){
+                $(".caja-boton-chiapas-mobile").click(function(){
+                    $(".contenido-mobile-chiapas").toggle();
+                });
+            });
+        </script>
+
+        {{-- Este script es para ver/ocultar el menu mobile de chiapas.gob.mx --}}
+        <script>
+            $(window).on('resize', function(){
+                var win = $(this); //this = window
+                if (win.width() <= 990 ) { 
+                    if($('.contenido-mobile-chiapas').is(':visible')){
+                        $(".contenido-mobile-chiapas").toggle();
+                    } else if( $('.contenido-mobile-chiapas').is(':hidden') ){
+
+                    }
+                }
+            });
+        </script>
     {{-- Scripts chiapas.gob.mx --}}
+
+        
 </body>
 
 </html>

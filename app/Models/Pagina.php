@@ -42,6 +42,12 @@ class Pagina extends Model
         return $this->hasMany(Archivo::class);
     }
 
+    // Relación 1:M. Una Página tiene muchas secciones
+    public function paginasSecciones()
+    {
+        return $this->hasMany(PaginaSeccion::class);
+    }
+
     // Agregué esta función para poder utilizar LogActivity, sin esta funcion marca error
     public function getActivitylogOptions(): LogOptions
     {

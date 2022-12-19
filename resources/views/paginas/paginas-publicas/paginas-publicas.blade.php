@@ -46,8 +46,8 @@
         {{-- Termina --}}
     @endif
     @endforeach
-    {{-- Este ciclo es para recorrer todos los archivos de la página actual --}}
     <div class="px-5" id="contenidoArchivos">
+        {{-- Este ciclo es para recorrer todos los archivos de la página actual --}}
         @forelse ($archivosPagina as $archivo)
             @if (!is_null($archivo->documento))
                 <p>
@@ -112,7 +112,98 @@
             @endif
 
         @empty
-        <p class="h6">No se encuentran archivos dentro de esta página</p>
+            {{-- <p class="h6">No se encuentran archivos dentro de esta página</p> --}}
+        @endforelse
+
+        {{-- Este ciclo es para recorrer las secciones que tiene una página y sus archivos de cada una --}}
+        @forelse ($seccionesPagina as $key => $item)
+            <div class="accordion accordion-flush" id="accordionFlush-{{$item->slug}}">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne-{{$item->slug}}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne-{{$item->slug}}" aria-expanded="false" aria-controls="flush-collapseOne-{{$item->slug}}">
+                        {{$item->titulo}}
+                    </button>
+                    </h2>
+                    <div id="flush-collapseOne-{{$item->slug}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne-{{$item->slug}}" data-bs-parent="#accordionFlush-{{$key}}">
+                        <div class="accordion-body"> 
+                            @forelse ($item->paginasSeccionesArchivos as $archivo)
+                                    <div class="d-flex flex-column">
+                                        <p> •
+                                            <a class="enlace-titulo" href="{{asset('storage').'/'.$archivo->archivo}}" title="Descargar"
+                                                download="{{$archivo->titulo}}" target="_blank">{{$archivo->titulo}}</a>
+                                            &nbsp;-&nbsp;
+                                            <a class="enlace" style="rgb(166, 75, 10);" href="{{asset('storage').'/'.$archivo->archivo}}"
+                                                title="Descargar" download="{{$archivo->titulo}}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                    <path
+                                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                                </svg>
+                                            </a>
+                                        </p>
+                                        <div>
+                                            <div class="d-flex ps-2">
+                                                <small class="text-black-50">Tamaño: {{$archivo->size_archivo}}</small>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <small class="text-black-50">Formato: {{$archivo->tipo}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                            @empty
+                                {{-- <div class="accordion-body">Sin archivos en la página</div> --}}
+                            @endforelse
+                            
+                            @forelse ($item->paginasSeccionesSubsecciones as $key => $subseccion)
+                                <div class="accordion accordion-flush" id="accordionFlush-{{$item->slug}}-{{$subseccion->slug}}">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingOne-{{$item->slug}}-{{$subseccion->slug}}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne-{{$item->slug}}-{{$subseccion->slug}}" aria-expanded="false" aria-controls="flush-collapseOne-{{$item->slug}}-{{$subseccion->slug}}">
+                                            {{$subseccion->titulo}}
+                                        </button>
+                                        </h2>
+                                        <div id="flush-collapseOne-{{$item->slug}}-{{$subseccion->slug}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne-{{$item->slug}}-{{$subseccion->slug}}" data-bs-parent="#accordionFlush-{{$key}}">
+                                            <div class="accordion-body"> 
+                                            @forelse ($subseccion->paginasSeccionesSubseccionesArchivos as $subSeccionArchivo)
+                                            <div class="d-flex flex-column">
+                                                <p> •
+                                                    <a class="enlace-titulo" href="{{asset('storage').'/'.$subSeccionArchivo->archivo}}" title="Descargar"
+                                                        download="{{$subSeccionArchivo->titulo}}" target="_blank">{{$subSeccionArchivo->titulo}}</a>
+                                                    &nbsp;-&nbsp;
+                                                    <a class="enlace" style="rgb(166, 75, 10);" href="{{asset('storage').'/'.$subSeccionArchivo->archivo}}"
+                                                        title="Descargar" download="{{$subSeccionArchivo->titulo}}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                            <path
+                                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                                <div>
+                                                    <div class="d-flex ps-2">
+                                                        <small class="text-black-50">Tamaño: {{$subSeccionArchivo->size_archivo}}</small>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <small class="text-black-50">Formato: {{$subSeccionArchivo->tipo}}</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            @empty
+                                                {{-- <div class="accordion-body">Sin archivos en la subsección</div> --}}
+                                            @endforelse
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="accordion-body">Sin subsección</div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p class="h6">No se encuentran secciones en esta página</p>
         @endforelse
     </div>
     <div class="px-5" id="contenidoArchivoBuscador" style="display: none;">
@@ -178,6 +269,15 @@
     /* icono del buscador */
     #iconoBuscador {
         cursor: pointer;
+    }
+
+</style>
+
+<style>
+
+    .bulletss{
+        color: rgba(110, 110, 110, 0.932);
+        font-size: 1em;
     }
 
 </style>

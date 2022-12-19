@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Archivo;
 use App\Models\Footer;
 use App\Models\Menu;
+use App\Models\PaginaSeccion;
+use App\Models\PaginaSeccionArchivo;
 use App\Models\User;
 use App\Rules\Recaptcha;
 use Illuminate\Support\Facades\Auth;
@@ -294,11 +296,26 @@ class PaginaController extends Controller
         $archivosPagina = Archivo::where('pagina_id', $pagina_seleccionada->id)
                                     ->where('estado', 'Si')
                                     ->get();
-        // dd($archivosPagina);
+                                    
+        // Obteniendo las secciones y los archivos de una sección
+        $seccionesPagina = PaginaSeccion::with(['paginasSeccionesArchivos' => function ($query) {
+                                            $query->where('estado', 'Si');
+                                        }])
+                                        ->with(['paginasSeccionesSubsecciones.paginasSeccionesSubseccionesArchivos' => function ($query) {
+                                            $query->where('estado', 'Si');
+                                        }])
+                                        ->with(['paginasSeccionesSubsecciones' => function ($query) {
+                                            $query->where('estado', 'Si');
+                                        }])
+                                        ->where('pagina_id', $pagina_seleccionada->id)
+                                        ->where('estado', 'Si')
+                                        ->get();
+
+                                        // dd($seccionesPagina);
 
         switch ($tipoPagina) {
             case 'pagina':
-                return view('paginas.paginas-publicas.paginas-publicas', compact('pagina','paginas','contenidoFooterContacto', 'contenidoFooterRecurso', 'contenidoFooterRedes', 'archivosPagina'));
+                return view('paginas.paginas-publicas.paginas-publicas', compact('pagina','paginas','contenidoFooterContacto', 'contenidoFooterRecurso', 'contenidoFooterRedes', 'archivosPagina', 'seccionesPagina'));
                 break;
             case 'blog':
                 return view('paginas.paginas-publicas.paginas-publicas', compact('pagina','paginas'));
