@@ -23,8 +23,10 @@ class Menu extends Model
         'target',
         'pagina_id',
         'nombre_pagina',
+        'menu_id',
     ];
 
+    // Menu dinámico (multinivel)
     public function getChildren($data, $line)
     {
         $children = [];
@@ -55,13 +57,36 @@ class Menu extends Model
         }
         return $menus->menuAll = $menuAll;
     }
+    // Menú dinámico (multinivel)
 
+    // Relación de un menú tiene muchas páginas 1:M
     public function paginas()
     {
         return $this->hasMany(Pagina::class);
     }
 
-    // Agregué esta función para poder utilizar LogActivity, sin esta funcion marca error
+    // Relación recursiva de menús, un menu tiene varios menus
+    public function menuss()
+    {
+        return $this->hasMany(Menu::class);
+    }
+
+    // Relación recursiva menus, se obtienen los hijos
+    public function children_menus()
+    {
+        return $this->hasMany(Menu::class)->with('menuss');
+    }
+    
+    // Relación recursiva menus, 1:M (inversa) se obtienen los padres
+    public function parent()
+    {
+        // Recusrividad que devuelve todos los padres
+        // La función with() se llama de forma recursiva
+        //Si se remueve el wiith, unicamente muestra al padre directo
+        return $this->belongsTo(Menu::class, 'menu_id')->with('parent');
+    }
+
+    // Agregué esta función para poder utilizar LogActivity
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

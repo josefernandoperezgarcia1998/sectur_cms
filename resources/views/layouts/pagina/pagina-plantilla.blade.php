@@ -113,6 +113,22 @@
                         }
                     }
                 </style>
+
+                {{-- Estilo para el menu de la izquierda --}}
+                <style>
+                    .contenedor-pagina-menu-lateral{
+                        display: flex;
+                        flex-direction: row;
+                    }
+                    @media screen and (min-width:0px) and (max-width:990px) {
+                        .contenedor-pagina-menu-lateral{
+                            flex-direction: column-reverse;
+                        }
+                        /* .menu-lateral{
+                            width: 100vw;
+                        } */
+                    }
+                </style>
 {{-- Termina links de chiapas.gob.mx --}}
     
 </head>
@@ -183,7 +199,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse caja2" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 caca">
+                    {{-- @foreach ($menus as $key => $item)
+                        @if ($item['parent'] != 0)
+                            @break
+                        @endif
+                        @include('shared.navbar', ['item' => $item])
+                    @endforeach --}}
                     @foreach ($menus as $key => $item)
                         @if ($item['parent'] != 0)
                             @break
@@ -264,12 +286,17 @@
 
     </style>
 
-    <div class="contedor-general">
-        <div class="container mt-5 shadow p-3 mb-5 bg-body rounded cuerpo">
-            <h3>@yield('titulo_pagina')</h3>
-            @yield('contenido')
+    <main class="contedor-general">
+        <div class="container contenedor-pagina-menu-lateral">
+            <div class="container mt-5 {{-- cuerpo --}} col-md-3 menu-lateral">
+                @yield('menu-lateral')
+            </div>
+            <div class="container mt-5 {{-- shadow p-3 mb-5 bg-body rounded --}} {{-- cuerpo --}}">
+                <h3>@yield('titulo_pagina')</h3>
+                @yield('contenido')
+            </div>
         </div>
-    </div>
+    </main>
     {{-- Footer --}}
     {{-- <div class="footer-container col-16 bg-dark">
         <footer class="py-5">

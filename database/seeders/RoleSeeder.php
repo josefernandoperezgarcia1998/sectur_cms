@@ -82,5 +82,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.roles.destroy',
                             'description' => 'Eliminar roles'])->syncRoles([$role1]);
 
+        // Secciones páginas internas
+        Permission::create(['name' => 'admin.paginas.pagina-seccion-index',
+                            'description' => 'Listado de secciones de páginas'])->syncRoles([$role1]);
+
+        // Subsecciones páginas internas
+        Permission::create(['name' => 'admin.paginas.pagina-subseccion-index',
+                            'description' => 'Listado de subsecciones de páginas'])->syncRoles([$role1]);
     }
 }

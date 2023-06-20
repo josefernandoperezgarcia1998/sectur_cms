@@ -1,24 +1,71 @@
 @extends('layouts.pagina.pagina-plantilla')
 
 @section('title_page')
-@foreach ($pagina as $page)
-{{$page->titulo}}
-@endforeach
+{{-- @foreach ($pagina as $page) --}}
+{{$pagina_seleccionada->titulo}}
+{{-- @endforeach --}}
+@endsection
+
+@section('menu-lateral')
+<div class="card">
+        @if ($sinMenuId == 1)
+            <div class="card-header">
+                {{$menuNombreSinMenuId}}
+            </div>
+            <div class="card-body">
+                    <ul>
+                        @forelse ($menusSinMenuId as $menu)
+                            {{-- <li id="{{$menu->pagina_id}}">{{$menu->name}}</li> --}}
+                            <li id="{{$menu->pagina_id}}">
+                                <a style="text-decoration: none;" @if($menu->enlace) href="https://{{ $menu->enlace }}" @elseif($menu->nombre_pagina) href="{{ route('pagina', $menu->nombre_pagina) }}" @else href="#" @endif target="{{$menu->target}}">{{$menu->name}}</a>
+                            </li>
+                        @empty
+
+                        @endforelse
+                    </ul>
+            </div>
+        @else
+        @endif
+        @if ($conMenuId == 1)
+            <div class="card-header">
+                {{$menuNombre->name}}
+            </div>
+            <div class="card-body">
+                    <ul>
+                        @forelse ($menus as $menu)
+                            {{-- <li id="{{$menu->pagina_id}}">{{$menu->name}}</li> --}}
+                            <li id="{{$menu->pagina_id}}">
+                                <a style="text-decoration: none;" @if($menu->enlace) href="https://{{ $menu->enlace }}" @elseif($menu->nombre_pagina) href="{{ route('pagina', $menu->nombre_pagina) }}" @else href="#" @endif target="{{$menu->target}}">{{$menu->name}}</a>
+                            </li>
+                                <ul>
+                                    @foreach ($menu->children_menus as $children_menu)
+                                        @include('menu.children-menus', ['children_menu' => $children_menu])
+                                    @endforeach
+                                </ul>
+                        @empty
+
+                        @endforelse
+                    </ul>
+            </div>
+        @else
+        @endif
+</div>
+<br>
 @endsection
 
 @section('contenido')
 <div class="card" style="border:none;">
     {{-- Este ciclo es por si la pagina tiene información interna como imagen, algún contenido texto/imagen --}}
-    @foreach ($pagina as $page)
-    @if ($page->estado == 'No')
+    {{-- @foreach ($pagina as $page) --}}
+    @if ($pagina_seleccionada->estado == 'No')
         @include('paginas.pagina-inactiva')
     @else
         {{-- Inicia --}}
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <div>
-                    <h1 class="display-6">{{$page->titulo}}</h1>
-                    <input type="hidden" name="paginaId" id="paginaId" value="{{$page->id}}">
+                    <h1 class="display-6">{{$pagina_seleccionada->titulo}}</h1>
+                    <input type="hidden" name="paginaId" id="paginaId" value="{{$pagina_seleccionada->id}}">
                 </div>
                 <div class="pt-3 d-flex">
                     <div>
@@ -34,18 +81,18 @@
             </div>
         </div>
         <div class="card-body">
-            @if (is_null($page->imagen_destacada) || $page->imagen_principal_estado == 'No')
+            @if (is_null($pagina_seleccionada->imagen_destacada) || $pagina_seleccionada->imagen_principal_estado == 'No')
     
             @else
-            <img src="{{asset('storage').'/'.$page->imagen_destacada}}" alt="imagen"
+            <img src="{{asset('storage').'/'.$pagina_seleccionada->imagen_destacada}}" alt="imagen"
                 class="img-fluid rounded mx-auto d-block">
             @endif
             <hr>
-            <div class="contenedor">{!!$page->contenido!!}</div>
+            <div class="contenedor">{!!$pagina_seleccionada->contenido!!}</div>
         </div>
         {{-- Termina --}}
     @endif
-    @endforeach
+    {{-- @endforeach --}}
     <div class="px-5" id="contenidoArchivos">
         {{-- Este ciclo es para recorrer todos los archivos de la página actual --}}
         @forelse ($archivosPagina as $archivo)
@@ -216,11 +263,11 @@
     <table class="table">
         <tr>
             <th class="table-active">Fuente</th>
-            <td>{{$page->fuente}}</td>
+            <td>{{$pagina_seleccionada->fuente}}</td>
         </tr>
         <tr>
             <th class="table-active">Actualización</th>
-            <td>{{$page->updated_at->isoFormat('LLLL')}}</td>
+            <td>{{$pagina_seleccionada->updated_at->isoFormat('LLLL')}}</td>
         </tr>
     </table>
 </div>
@@ -341,6 +388,16 @@
             }
         });
     });
+</script>
+
+<script>
+    // Obtener la URL completa
+let urlCompleta = window.location.href;
+
+// Obtener el parámetro de la URL después del dominio
+let parametroURL = urlCompleta.substring(urlCompleta.lastIndexOf('/') + 1);
+
+console.log(parametroURL);
 </script>
 
 @endpush

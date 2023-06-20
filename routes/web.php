@@ -112,6 +112,7 @@ Route::get('prueba', function() {
    // Session::forget('paginaSubSeccionSelectedSlug');
    // Session::forget('paginaSubSeccionSelectedId');
    // Session::forget('pagSecSubArchId');
+   Session::forget('menuSelectId');
    // dd(session()->all());
    // $test = PaginaSeccion::with('paginasSeccionesArchivos','paginasSeccionesSubsecciones')->get();
    // dd($test);
@@ -128,6 +129,8 @@ Route::get('paginas-subsecciones-data', [PaginaSubSeccionController::class, 'pag
 // Ruta con ajax para obtener toda las secciones de paginas con datatables
 // Route::get('paginas-secciones-data', [PaginaSeccionController::class, 'paginasSeccionesDatatables'])->name('paginas-secciones-data');
 
+Route::post('menuSessionSelectId', [PaginaController::class, 'menuSessionSelectId'])->name('menuSessionSelectId');
+
 // Ruta con ajax para obtener toda las secciones de paginas con datatables
 // Route::get('paginas-secciones-archivos-data', [PaginaSeccionArchivoController::class, 'paginasSeccionesArchivosDatatables'])->name('paginas-secciones-archivos-data');
 
@@ -141,7 +144,7 @@ Route::get('repositorios-data', [RepositorioController::class, 'repositoriosData
 Route::get('paginas-data', [PaginaController::class, 'paginasDatatables'])->name('paginas-data');
 
 // Ruta get para visualziar las páginas
-Route::get('{pagina}', [PaginaController::class, 'tipoPagina'])->name('pagina');
+Route::get('{pagina?}', [PaginaController::class, 'tipoPagina'])->name('pagina');
 
 // Ruta para subir imagen
 Route::post('image/upload', [PaginaController::class, 'upload'])->name('image.upload');

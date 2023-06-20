@@ -22,6 +22,7 @@ class HomeController extends Controller
         $paginasUsuario = [];
         $paginasUsuario = $paginasContadorUsuarioAuth[1]->paginas;
         $paginasUsuarioAutenticado = collect($paginasUsuario)->count();
+        // dd($paginasUsuarioAutenticado);
 
         return view('dashboard.tablero', compact('usuarioContador', 'menuContador', 'paginaContador', 'paginasUsuarioAutenticado'));
     }

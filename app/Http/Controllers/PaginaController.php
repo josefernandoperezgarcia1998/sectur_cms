@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Rules\Recaptcha;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 use Illuminate\Support\Str;
@@ -311,11 +312,65 @@ class PaginaController extends Controller
                                         ->where('estado', 'Si')
                                         ->get();
 
-                                        // dd($seccionesPagina);
+        $menu_pg_seleccionada = Menu::where('pagina_id', '=', $pagina_seleccionada->id)
+                                    ->select('id')
+                                    ->get();
+        
+        $menu_pg_seleccionada_id = '';
+        
+        foreach($menu_pg_seleccionada as $menu){
+            $menu_pg_seleccionada_id = $menu->id;
+        }
+
+        $menu_id = Session::get('menuSelectId');
+
+        $sinMenuId = null;
+        $conMenuId = null;
+        $menuNombre = null;
+        $menus = null;
+        $menuNombreSinMenuId = null;
+        $menusSinMenuId = null;
+
+        if($menu_id == null)
+        {
+            $menuNombreSinMenuId = 'Secretaría de Turismo';
+            $menusSinMenuId = Menu::where('parent', 0)
+                                    ->orderBy('order', 'asc')
+                                    ->get();
+            $sinMenuId = 1;
+            $conMenuId = 0;
+        } else {
+            $menuNombre = Menu::find(Session::get('menuSelectId'),['name']);
+
+            $menus = Menu::where('menu_id', Session::get('menuSelectId'))
+                        // ->with('children_menus')
+                        ->with('parent')
+                        ->get();
+            $conMenuId = 1;
+            $sinMenuId = 0;
+
+        }
+        
 
         switch ($tipoPagina) {
             case 'pagina':
-                return view('paginas.paginas-publicas.paginas-publicas', compact('pagina','paginas','contenidoFooterContacto', 'contenidoFooterRecurso', 'contenidoFooterRedes', 'archivosPagina', 'seccionesPagina'));
+                return view('paginas.paginas-publicas.paginas-publicas', 
+                            compact(
+                                'pagina',
+                                'paginas',
+                                'pagina_seleccionada',
+                                'contenidoFooterContacto', 
+                                'contenidoFooterRecurso',
+                                'contenidoFooterRedes', 
+                                'archivosPagina', 
+                                'seccionesPagina',
+                                'menus',
+                                'menuNombre',
+                                'conMenuId',
+                                'menusSinMenuId',
+                                'sinMenuId',
+                                'menuNombreSinMenuId',
+                            ));
                 break;
             case 'blog':
                 return view('paginas.paginas-publicas.paginas-publicas', compact('pagina','paginas'));
@@ -338,5 +393,12 @@ class PaginaController extends Controller
         return [
             'url' => Storage::url($path),
         ];
+    }
+
+    public function menuSessionSelectId(Request $request)
+    {
+        if ($request->ajax()) {
+            return Session::put('menuSelectId', $request->menuSelectId);
+        }
     }
 }

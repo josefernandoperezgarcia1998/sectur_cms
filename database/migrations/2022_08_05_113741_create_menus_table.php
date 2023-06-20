@@ -24,6 +24,8 @@ return new class extends Migration
             $table->enum('target',['_blank','_self','_parent','_top'])->default('_blank')->nullable();
             $table->unsignedBigInteger('pagina_id')->nullable();
             $table->foreign('pagina_id')->references('id')->on('paginas');
+            $table->unsignedBigInteger('menu_id')->nullable();
+            $table->foreign('menu_id')->references('id')->on('menus');
             $table->string('nombre_pagina')->nullable();
             $table->timestamps();
         });
