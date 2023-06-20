@@ -53,7 +53,7 @@ class PaginaController extends Controller
             'titulo'                => 'required',
             'tipo_pagina'           => 'required',
             'estado'                => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         // Si existe una imagen destacada en el request se almacena en el storage
@@ -103,7 +103,7 @@ class PaginaController extends Controller
             'titulo'                => 'required',
             'tipo_pagina'           => 'required',
             'estado'                => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         // La primer condición dice 

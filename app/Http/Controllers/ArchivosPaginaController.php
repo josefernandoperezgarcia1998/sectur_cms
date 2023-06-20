@@ -60,7 +60,7 @@ class ArchivosPaginaController extends Controller
             'imagen'                => 'mimes:jpg,jpeg,png',
             'documento'             => 'mimes:doc,pdf,docx,xlsx',
             'estado'                => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
         
         if($request->hasFile('imagen')){
@@ -233,7 +233,7 @@ class ArchivosPaginaController extends Controller
             'imagen'                => 'mimes:jpg,jpeg,png',
             'documento'             => 'mimes:doc,pdf,docx,xlsx',
             'estado'                => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         // Si el request tiene una imagen se elimina la actual para almacenar la nueva

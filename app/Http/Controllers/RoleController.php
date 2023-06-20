@@ -58,7 +58,7 @@ class RoleController extends Controller
 
         $request->validate([
             'name'                  => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
         
         $rol = Role::create($valores);
@@ -122,7 +122,7 @@ class RoleController extends Controller
 
         $request->validate([
             'name'                  => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         $role = Role::findOrFail($id);

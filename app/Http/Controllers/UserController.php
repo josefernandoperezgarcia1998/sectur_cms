@@ -56,7 +56,7 @@ class UserController extends Controller
             'estado'                => ['required'],
             'roles'                 => ['required'],
             'paginas'               => ['required'],
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         /* Fallo en caso de que las reglas de validación fallen */
@@ -113,7 +113,7 @@ class UserController extends Controller
             'name'                  => ['required', 'string'],
             'email'                 => ['required', 'string'],
             'estado'                => ['required'],
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         /* Fallo en caso de que las reglas de validación fallen */

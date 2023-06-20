@@ -68,7 +68,7 @@ class PaginaSeccionArchivoController extends Controller
             'enlace'                => 'sometimes',
             'estado'                => 'required',
             'seccion_id'            => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         if($request->hasFile('archivo')){
@@ -157,7 +157,7 @@ class PaginaSeccionArchivoController extends Controller
             'enlace'                => 'sometimes',
             'estado'                => 'required',
             'seccion_id'            => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         if($request->hasFile('archivo')){

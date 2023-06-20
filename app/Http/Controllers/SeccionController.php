@@ -86,7 +86,7 @@ class SeccionController extends Controller
             'mapa'                  => 'nullable',
             'identificador'         => 'required|string',
             'banner_principal'      => 'nullable',
-            'g-recaptcha-response'  => ['required', new Recaptcha]
+            //'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
 
         // Si el request eiene una imagen
@@ -178,7 +178,7 @@ class SeccionController extends Controller
             'estado'                => 'required',
             'mapa'                  => 'nullable',
             'identificador'         => 'required|string',
-            'g-recaptcha-response'  => ['required', new Recaptcha]
+            //'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
 
         // Si el request no tiene una imagen, la crea

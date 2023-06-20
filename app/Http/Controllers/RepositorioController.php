@@ -46,7 +46,7 @@ class RepositorioController extends Controller
         $validated = $request->validate([
             'titulo'                => 'required|string',
             'archivo'               => 'required|mimes:jpg,jpeg,png,doc,pdf,docx,xlsx,webp',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         if($request->hasFile('archivo')){
@@ -107,7 +107,7 @@ class RepositorioController extends Controller
         $validated = $request->validate([
             'titulo'                => 'required|string',
             'archivo'               => 'required|mimes:jpg,jpeg,png,doc,pdf,docx,xlsx,webp',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
                // Si el request tiene una imagen se elimina la actual para almacenar la nueva

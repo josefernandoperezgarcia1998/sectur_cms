@@ -46,7 +46,7 @@ class MenuController extends Controller
             'name'                  => 'required',
             'order'                 => 'required',
             'enabled'               => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha]
+            //'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
 
         // dd($request->all());
@@ -88,7 +88,7 @@ class MenuController extends Controller
             'name'                  => 'required',
             'order'                 => 'required',
             'enabled'               => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha]
+            //'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
         // $valoresMenu = $request->all();
         // $menu = Menu::find($id);

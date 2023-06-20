@@ -36,7 +36,7 @@ class FooterController extends Controller
             'nombre'                => 'required',
             'tipo'                  => 'required',
             'estado'                => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha]
+            //'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
 
         Footer::create($valorContenido);
@@ -59,7 +59,7 @@ class FooterController extends Controller
             'nombre'                => 'required',
             'tipo'                  => 'required',
             'estado'                => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha]
+            //'g-recaptcha-response'  => ['required', new Recaptcha]
         ]);
 
         $footer = Footer::find($id);

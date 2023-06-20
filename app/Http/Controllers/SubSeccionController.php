@@ -48,7 +48,7 @@ class SubSeccionController extends Controller
             'imagen_telefono'       => 'nullable|mimes:jpg,jpeg,png,webp',
             'enlace'                => 'nullable',
             'estado'                => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         $subSeccionDatos['seccion_id'] = Session::get('seccion_id');
@@ -124,7 +124,7 @@ class SubSeccionController extends Controller
             'imagen_telefono'       => 'nullable|mimes:jpg,jpeg,png',
             'enlace'                => 'nullable',
             'estado'                => 'required',
-            'g-recaptcha-response'  => ['required', new Recaptcha],
+            //'g-recaptcha-response'  => ['required', new Recaptcha],
         ]);
 
         $subSeccionDatos['seccion_id'] = Session::get('seccion_id');
