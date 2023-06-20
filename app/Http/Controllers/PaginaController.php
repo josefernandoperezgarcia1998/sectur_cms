@@ -342,15 +342,15 @@ class PaginaController extends Controller
         } else {
             $menuNombre = Menu::find(Session::get('menuSelectId'),['name']);
 
-            $menus = Menu::where('menu_id', Session::get('menuSelectId'))
-                        // ->with('children_menus')
-                        ->with('parent')
+            $menus = Menu::where('parent', Session::get('menuSelectId'))
+                        //->with('children_menus')
+                        //->with('parent')
                         ->get();
             $conMenuId = 1;
             $sinMenuId = 0;
 
         }
-        
+        // dd($menus);
 
         switch ($tipoPagina) {
             case 'pagina':

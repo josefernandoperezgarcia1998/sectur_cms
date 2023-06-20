@@ -16,7 +16,6 @@ class Menu extends Model
         'name',
         'slug',
         'parent',
-        'parent',
         'order',
         'enabled',
         'enlace',
@@ -83,7 +82,7 @@ class Menu extends Model
         // Recusrividad que devuelve todos los padres
         // La función with() se llama de forma recursiva
         //Si se remueve el wiith, unicamente muestra al padre directo
-        return $this->belongsTo(Menu::class, 'menu_id')->with('parent');
+        return $this->belongsTo(Menu::class, 'parent')->with('parent');
     }
 
     // Agregué esta función para poder utilizar LogActivity
