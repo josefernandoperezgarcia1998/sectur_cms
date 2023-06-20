@@ -112,11 +112,26 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;{{$menu->name}}</option>
                                     @endif
                                     @endforeach --}}
-                                    @foreach ($menus as $key => $item)
+                                    {{-- @foreach ($menus as $key => $item)
                                         @if ($item['parent'] != 0)
                                             @break
                                         @endif
                                         @include('shared.menus.create', ['item' => $item])
+                                    @endforeach --}}
+                                    @foreach ($menus as $menu)
+                                        @if ($menu['parent'] == 0)
+                                            <option value="{{ $menu['id'] }}">
+                                                {{ $menu['name'] }}
+                                            </option>
+                                            @foreach ($menu['submenu'] as $item)
+                                                <option value="{{ $item['id'] }}">&nbsp;&nbsp;&nbsp;{{$item['name']}}</option>
+                                                @foreach ($item['submenu'] as $items)
+                                                    <option value="{{ $items['id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$items['name']}}</option>
+                                                @endforeach
+                                            @endforeach
+                                        @else
+                                        
+                                        @endif
                                     @endforeach
                                 </select>
                                 

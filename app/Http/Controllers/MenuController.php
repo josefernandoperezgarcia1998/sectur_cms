@@ -33,6 +33,7 @@ class MenuController extends Controller
         // dd($arreglos);
 
         $menus = Menu::menus();
+        // dd($menus);
         // $menus = Menu::all();
         $paginas = DB::table('paginas')->orderBy('titulo','asc')->get();
         return view('menu.create', compact('menus','paginas'));
@@ -58,6 +59,7 @@ class MenuController extends Controller
             $slugPagina = $paginaNombre->slug;
 
             $valoresMenu['nombre_pagina'] = $slugPagina;
+            $valoresMenu['menu_id'] = $request->parent;
             
             Menu::create($valoresMenu);
             return redirect()->route('menus.index')->with('success', 'Registro creado correctamente');
